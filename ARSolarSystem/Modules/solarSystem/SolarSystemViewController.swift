@@ -9,14 +9,29 @@ import UIKit
 import SceneKit
 import ARKit
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
     
-    @IBOutlet var sceneView: ARSCNView!
+    private lazy var sceneView: ARSCNView = {
+        let scene = ARSCNView()
+        scene.translatesAutoresizingMaskIntoConstraints = false
+        return scene
+    }()
     
     private let baseNode = SCNNode()
     
+    private func constrainstSetup() {
+        NSLayoutConstraint.activate([
+            sceneView.topAnchor.constraint(equalTo: view.topAnchor),
+            sceneView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            sceneView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            sceneView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(sceneView)
+        constrainstSetup()
         sceneView.delegate = self
         sceneView.showsStatistics = false
         
