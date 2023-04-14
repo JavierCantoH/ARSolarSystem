@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC70606D29E9E06C00F729A7 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC70606C29E9E06C00F729A7 /* TabBarViewController.swift */; };
+		EC70607029E9E12B00F729A7 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC70606F29E9E12B00F729A7 /* ProfileViewController.swift */; };
 		ECD2913E29CF8DBE002DFAFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD2913D29CF8DBE002DFAFA /* AppDelegate.swift */; };
 		ECD2914029CF8DBE002DFAFA /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ECD2913F29CF8DBE002DFAFA /* art.scnassets */; };
 		ECD2914229CF8DBE002DFAFA /* SolarSystemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD2914129CF8DBE002DFAFA /* SolarSystemViewController.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EC70606C29E9E06C00F729A7 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		EC70606F29E9E12B00F729A7 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		ECD2913A29CF8DBE002DFAFA /* ARSolarSystem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARSolarSystem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECD2913D29CF8DBE002DFAFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECD2913F29CF8DBE002DFAFA /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -43,6 +47,8 @@
 		EC70606629E9D05500F729A7 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				EC70606E29E9E11800F729A7 /* Profile */,
+				EC70606B29E9E03700F729A7 /* BottomMenu */,
 				EC70606A29E9D07E00F729A7 /* Main */,
 				EC70606929E9D06E00F729A7 /* Register */,
 				EC70606829E9D06800F729A7 /* Login */,
@@ -81,6 +87,22 @@
 				ECD291AA29E5E83F002DFAFA /* MainViewController.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		EC70606B29E9E03700F729A7 /* BottomMenu */ = {
+			isa = PBXGroup;
+			children = (
+				EC70606C29E9E06C00F729A7 /* TabBarViewController.swift */,
+			);
+			path = BottomMenu;
+			sourceTree = "<group>";
+		};
+		EC70606E29E9E11800F729A7 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				EC70606F29E9E12B00F729A7 /* ProfileViewController.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		ECD2913129CF8DBE002DFAFA = {
@@ -186,6 +208,8 @@
 				ECD291AF29E5E979002DFAFA /* RegisterViewController.swift in Sources */,
 				ECD291AB29E5E83F002DFAFA /* MainViewController.swift in Sources */,
 				ECD2914229CF8DBE002DFAFA /* SolarSystemViewController.swift in Sources */,
+				EC70607029E9E12B00F729A7 /* ProfileViewController.swift in Sources */,
+				EC70606D29E9E06C00F729A7 /* TabBarViewController.swift in Sources */,
 				ECD2913E29CF8DBE002DFAFA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

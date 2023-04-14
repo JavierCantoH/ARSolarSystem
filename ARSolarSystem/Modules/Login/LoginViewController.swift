@@ -9,21 +9,97 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    private lazy var logoImage: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFit
+        image.image = UIImage(named: "appLogo")
+        return image
+    }()
+    
+    private lazy var userTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "User"
+        textField.backgroundColor = .white
+        textField.layer.cornerRadius = 10
+        return textField
+    }()
+    
+    private lazy var passwordTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "Password"
+        textField.backgroundColor = .white
+        textField.layer.cornerRadius = 10
+        return textField
+    }()
+    
+    private lazy var buttonEnter: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setTitle("Play", for: .normal)
+        btn.backgroundColor = .blue
+        btn.layer.cornerRadius = 10
+        return btn
+    }()
+    
+    private lazy var resgisterBtn: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setTitle("No account? Register here", for: .normal)
+        btn.backgroundColor = .gray
+        btn.layer.cornerRadius = 10
+        btn.addTarget(self, action: #selector(registerAction), for: .touchUpInside)
+        return btn
+    }()
+    
+    @objc private func registerAction() {
+        let viewController = RegisterViewController()
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupView()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setupView() {
+        title = "Login"
+        view.backgroundColor = .white
+        view.addSubview(logoImage)
+        view.addSubview(userTextField)
+        view.addSubview(passwordTextField)
+        view.addSubview(buttonEnter)
+        view.addSubview(resgisterBtn)
+        constraintsSetUp()
     }
-    */
-
+    
+    private func constraintsSetUp(){
+        NSLayoutConstraint.activate([
+            logoImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+            logoImage.heightAnchor.constraint(equalToConstant: 300),
+            logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            userTextField.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 16),
+            userTextField.heightAnchor.constraint(equalToConstant: 50),
+            userTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            userTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            passwordTextField.topAnchor.constraint(equalTo: userTextField.bottomAnchor, constant: 16),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 50),
+            passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            buttonEnter.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16),
+            buttonEnter.heightAnchor.constraint(equalToConstant: 50),
+            buttonEnter.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            buttonEnter.widthAnchor.constraint(equalToConstant: 100),
+            
+            resgisterBtn.topAnchor.constraint(equalTo: buttonEnter.bottomAnchor, constant: 16),
+            resgisterBtn.heightAnchor.constraint(equalToConstant: 50),
+            resgisterBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            resgisterBtn.widthAnchor.constraint(equalToConstant: 300),
+        ])
+    }
 }
