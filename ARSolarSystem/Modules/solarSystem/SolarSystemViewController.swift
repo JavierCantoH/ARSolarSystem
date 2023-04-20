@@ -120,10 +120,28 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         baseNode.addChildNode(uranusRing)
         baseNode.addChildNode(neptuneRing)
         baseNode.position = SCNVector3(x: 0, y: -0.5, z: -1)
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
         
         let scene = SCNScene()
         sceneView.scene = scene
+        sceneView.addGestureRecognizer(tap)
         sceneView.scene.rootNode.addChildNode(baseNode)
+    }
+    
+    @objc func handleTap(rec: UITapGestureRecognizer){
+       if rec.state == .ended {
+            let location: CGPoint = rec.location(in: sceneView)
+            let hits = self.sceneView.hitTest(location, options: nil)
+            if !hits.isEmpty{
+                let tappedNode = hits.first?.node
+                checkTappedNde(tappedNode: tappedNode!)
+            }
+       }
+    }
+    
+    private func checkTappedNde(tappedNode: SCNNode) {
+        print("tappedNode: \(String(describing: tappedNode.name))")
     }
     
     private func createPlanet(radius: Float, image: String) -> SCNNode {
