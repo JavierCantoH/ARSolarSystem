@@ -35,6 +35,7 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         sceneView.delegate = self
         sceneView.showsStatistics = false
         
+        
         let sun = createPlanet(radius: 0.25, image: "sun")
         sun.position = SCNVector3(x: 0, y: 0, z: 0)
         rotateObject(rotation: -0.3, planet: sun, duration: 1)
@@ -119,6 +120,16 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         baseNode.addChildNode(saturnRing)
         baseNode.addChildNode(uranusRing)
         baseNode.addChildNode(neptuneRing)
+        baseNode.addChildNode(moonRingNode)
+        baseNode.addChildNode(mercury)
+        baseNode.addChildNode(venus)
+        baseNode.addChildNode(earth)
+        baseNode.addChildNode(mars)
+        baseNode.addChildNode(jupiter)
+        baseNode.addChildNode(saturn)
+        baseNode.addChildNode(uranus)
+        baseNode.addChildNode(neptune)
+
         baseNode.position = SCNVector3(x: 0, y: -0.5, z: -1)
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
@@ -130,15 +141,32 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @objc func handleTap(rec: UITapGestureRecognizer){
+        let location = rec.location(in: sceneView)
+        let hitTestResults = sceneView.hitTest(location, options: [.rootNode: baseNode])
+
+        guard let node = hitTestResults.first?.node else { return }
        if rec.state == .ended {
             let location: CGPoint = rec.location(in: sceneView)
             let hits = self.sceneView.hitTest(location, options: nil)
             if !hits.isEmpty{
                 let tappedNode = hits.first?.node
+                tappedNode?.scale  = SCNVector3(x: 2.5, y: 2.5, z: 2.5)
                 checkTappedNde(tappedNode: tappedNode!)
             }
+           
        }
+        // Hide all the planets except the tapped planet
+        baseNode.childNodes.forEach {
+            if $0 != node {
+                $0.isHidden = true
+            }
+        }
+        
+        // Move the tapped planet to the center of the screen
+        let action = SCNAction.move(to: SCNVector3(0, 0, 0), duration: 0.5)
+        node.runAction(action)
     }
+    
     
     private func checkTappedNde(tappedNode: SCNNode) {
         print("tappedNode: \(String(describing: tappedNode.name))")
