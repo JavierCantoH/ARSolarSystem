@@ -150,6 +150,7 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         material.diffuse.contents  = UIImage(named: "\(image).jpg")
         planet.materials = [material]
         let planetNode = SCNNode(geometry: planet)
+        planetNode.name = image
         return planetNode
     }
     
