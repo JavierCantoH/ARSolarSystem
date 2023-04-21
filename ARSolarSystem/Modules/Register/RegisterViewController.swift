@@ -50,6 +50,7 @@ class RegisterViewController: UIViewController {
         btn.setTitle("Register", for: .normal)
         btn.backgroundColor = .blue
         btn.layer.cornerRadius = 10
+        btn.addTarget(self, action: #selector(registerAction), for: .touchUpInside)
         return btn
     }()
     
@@ -64,8 +65,11 @@ class RegisterViewController: UIViewController {
     }()
     
     @objc private func loginAction() {
-        let viewController = LoginViewController()
-        navigationController?.pushViewController(viewController, animated: true)
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func registerAction() {
+        
     }
     
     override func viewDidLoad() {
