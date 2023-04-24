@@ -5,6 +5,10 @@
 //  Created by Luis Javier Canto Hurtado on 25/03/23.
 //
 
+
+//baseNode.childNodes.forEach { node in
+//    print("node: \(String(describing: node.name))")
+//}
 import UIKit
 import SceneKit
 import ARKit
@@ -17,8 +21,6 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         scene.translatesAutoresizingMaskIntoConstraints = false
         return scene
     }()
-    
-    private var currentPlanet: String = ""
     
     private lazy var backRoundBtn: UIButton = {
         let button = UIButton()
@@ -36,27 +38,11 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         return button
     }()
     
-    @objc func goBack() {
-        baseNode.childNodes.forEach { node in
-            // delete the node 
-            if node.name == currentPlanet {
-                node.removeFromParentNode()
-            }
-            if node.childNodes.isEmpty && node.name == "ringNode"  {
-                // TODO: modify, right now the properties are for planet Earth only and add moon
-                let planetRestore = createPlanet(radius: 0.05, image: "earth")
-                planetRestore.position = SCNVector3(x: 0.7, y: 0, z: 0)
-                rotateObject(rotation: 0.25, planet: planetRestore, duration: 0.4)
-                //planetRestore.addChildNode(moonRingNode)
-                node.addChildNode(planetRestore)
-            }
-            node.isHidden = false
-        }
-        backRoundBtn.isHidden = true
-    }
-    
     // parent node for all the planets and other objects in the scene
     private let baseNode = SCNNode()
+    
+    // keep track of the current planet where the user clicked
+    private var currentPlanet = SCNNode()
     
     private func constrainstSetup() {
         NSLayoutConstraint.activate([
@@ -176,7 +162,8 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         baseNode.addChildNode(neptuneRing)
 
         baseNode.position = SCNVector3(x: 0, y: -0.5, z: -1)
-
+        
+        // adding the gesture recognizer to detect which planet the user is clicking
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
         
         let scene = SCNScene()
@@ -188,39 +175,47 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
     @objc func handleTap(rec: UITapGestureRecognizer){
         let location = rec.location(in: sceneView)
         let hitTestResults = sceneView.hitTest(location, options: [.rootNode: baseNode])
-        guard let node = hitTestResults.first?.node else { return }
-        if rec.state == .ended {
-            let location: CGPoint = rec.location(in: sceneView)
-            let hits = self.sceneView.hitTest(location, options: nil)
-            if !hits.isEmpty{
-                let tappedNode = hits.first?.node
-                if tappedNode?.name != "saturn_loop" && tappedNode?.name != "ringNode" {
-                    tappedNode?.scale  = SCNVector3(x: 8, y: 8, z: 8)
-                    // adding tapped node as child to the base node
-                    baseNode.addChildNode(node)
-                    // Hide all the planets except the tapped planet
-                    baseNode.childNodes.forEach {
-                        if $0 != node {
-                            $0.isHidden = true
-                        }
-                    }
-                    // Move the tapped planet to the center of the screen
-                    let action = SCNAction.move(to: SCNVector3(0, 0, 0), duration: 0.5)
-                    node.runAction(action)
-                    // check which node is tapped
-                    checkTappedNde(tappedNode: tappedNode!)
+        guard let tappedNode = hitTestResults.first?.node else { return }
+        if tappedNode.name != "saturn_loop" && tappedNode.name != "ringNode" {
+            // copy the node
+            var tappedNodeCopy = tappedNode.clone()
+            baseNode.addChildNode(tappedNodeCopy)
+            // hide all nodes except the tappedNodeCopy
+            baseNode.childNodes.forEach {
+                if $0 != tappedNodeCopy {
+                    $0.isHidden = true
                 }
             }
+            // increase size of tappedNodeCopy
+            tappedNodeCopy.scale  = SCNVector3(x: 8, y: 8, z: 8)
+            // Move the tapped planet to the center of the screen
+            let action = SCNAction.move(to: SCNVector3(0, 0, 0), duration: 0.5)
+            tappedNodeCopy.runAction(action)
+            // check which node is tapped
+            checkTappedNodeInfo(tappedNode: tappedNodeCopy)
+            currentPlanet = tappedNodeCopy
+            backRoundBtn.isHidden = false
         }
     }
     
-    private func checkTappedNde(tappedNode: SCNNode) {
-        print("tappedNode: \(String(describing: tappedNode.name))")
-        backRoundBtn.isHidden = false
+    @objc private func goBack() {
+        baseNode.childNodes.forEach { node in
+            // delete the tappedNodeCopy
+            if node == currentPlanet {
+                node.removeFromParentNode()
+            }
+            // show the rest of the solar system
+            node.isHidden = false
+        }
+        // restore the current selected node
+        currentPlanet = SCNNode()
+        backRoundBtn.isHidden = true
+    }
+    
+    private func checkTappedNodeInfo(tappedNode: SCNNode) {
         if tappedNode.name == "earth" {
-            currentPlanet = "earth"
             // TODO: show some information about earth
-        } else if tappedNode.name == "etc.." { // TODO: rest of the planets
+        } else if tappedNode.name == "sun" { // TODO: rest of the planets
             
         }
     }
