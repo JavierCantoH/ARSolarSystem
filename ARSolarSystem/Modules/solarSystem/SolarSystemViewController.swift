@@ -6,9 +6,6 @@
 //
 
 
-//baseNode.childNodes.forEach { node in
-//    print("node: \(String(describing: node.name))")
-//}
 import UIKit
 import SceneKit
 import ARKit
@@ -38,6 +35,21 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         return button
     }()
     
+    private lazy var infoLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = .clear
+        label.layer.cornerRadius = 10.0
+        label.layer.borderColor = UIColor.blue.cgColor
+        label.layer.borderWidth = 2.0
+        label.isHidden = true
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.textAlignment = .center
+        label.textColor = .black
+        return label
+    }()
+    
     // parent node for all the planets and other objects in the scene
     private let baseNode = SCNNode()
     
@@ -54,6 +66,10 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
             backRoundBtn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             backRoundBtn.widthAnchor.constraint(equalToConstant: 90),
             backRoundBtn.heightAnchor.constraint(equalToConstant: 60),
+            infoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            infoLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            infoLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            infoLabel.heightAnchor.constraint(equalToConstant: 100),
         ])
     }
     
@@ -61,6 +77,7 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         super.viewDidLoad()
         view.addSubview(sceneView)
         view.addSubview(backRoundBtn)
+        view.addSubview(infoLabel)
         constrainstSetup()
         sceneView.delegate = self
         sceneView.showsStatistics = false
@@ -178,7 +195,7 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         guard let tappedNode = hitTestResults.first?.node else { return }
         if tappedNode.name != "saturn_loop" && tappedNode.name != "ringNode" {
             // copy the node
-            var tappedNodeCopy = tappedNode.clone()
+            let tappedNodeCopy = tappedNode.clone()
             baseNode.addChildNode(tappedNodeCopy)
             // hide all nodes except the tappedNodeCopy
             baseNode.childNodes.forEach {
@@ -186,11 +203,13 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
                     $0.isHidden = true
                 }
             }
-            // increase size of tappedNodeCopy
-            tappedNodeCopy.scale  = SCNVector3(x: 8, y: 8, z: 8)
-            // Move the tapped planet to the center of the screen
-            let action = SCNAction.move(to: SCNVector3(0, 0, 0), duration: 0.5)
-            tappedNodeCopy.runAction(action)
+            if tappedNode.name != "sun" {
+                // increase size of tappedNodeCopy
+                tappedNodeCopy.scale = SCNVector3(x: 8, y: 8, z: 8)
+                // Move the tapped planet to the center of the screen
+                let action = SCNAction.move(to: SCNVector3(0, 0, 0), duration: 0.5)
+                tappedNodeCopy.runAction(action)
+            }
             // check which node is tapped
             checkTappedNodeInfo(tappedNode: tappedNodeCopy)
             currentPlanet = tappedNodeCopy
@@ -210,15 +229,38 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         // restore the current selected node
         currentPlanet = SCNNode()
         backRoundBtn.isHidden = true
+        infoLabel.isHidden = true
+        infoLabel.text = ""
     }
     
     private func checkTappedNodeInfo(tappedNode: SCNNode) {
-        if tappedNode.name == "earth" {
-            // TODO: show some information about earth
-        } else if tappedNode.name == "sun" { // TODO: rest of the planets
-            
+        infoLabel.isHidden = false
+        switch tappedNode.name {
+        case "sun":
+            infoLabel.text = "Sun\nMass: 1.99 x 10^30 kg\nRadius: 695,700 km"
+        case "mercury":
+            infoLabel.text = "Mercury\nMass: 3.30 x 10^23 kg\nRadius: 2,440 km"
+        case "venus":
+            infoLabel.text = "Venus\nMass: 4.87 x 10^24 kg\nRadius: 6,052 km"
+        case "earth":
+            infoLabel.text = "Earth\nMass: 5.97 x 10^24 kg\nRadius: 6,371 km"
+        case "mars":
+            infoLabel.text = "Mars\nMass: 6.39 x 10^23 kg\nRadius: 3,390 km"
+        case "jupiter":
+            infoLabel.text = "Jupiter\nMass: 1.90 x 10^27 kg\nRadius: 69,911 km"
+        case "saturn":
+            infoLabel.text = "Saturn\nMass: 5.68 x 10^26 kg\nRadius: 58,232 km"
+        case "uranus":
+            infoLabel.text = "Uranus\nMass: 8.68 x 10^25 kg\nRadius: 25,362 km"
+        case "neptune":
+            infoLabel.text = "Neptune\nMass: 1.02 x 10^26 kg\nRadius: 24,622 km"
+        case "moon":
+            infoLabel.text = "Moon\nMass: 7.34 x 10^22 kg\nRadius: 1,737 km"
+        default:
+            infoLabel.text = "No information available"
         }
     }
+
     
     private func createPlanet(radius: Float, image: String) -> SCNNode {
         let planet = SCNSphere(radius: CGFloat(radius))

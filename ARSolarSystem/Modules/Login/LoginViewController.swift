@@ -20,18 +20,33 @@ class LoginViewController: UIViewController {
     private lazy var userTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = "User"
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 10
+        textField.layer.borderColor = UIColor.gray.cgColor
+        textField.layer.borderWidth = 1.0
+        textField.attributedPlaceholder = NSAttributedString(string: "User", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        textField.textColor = .black
+        // Add a padding view to the left of the text field
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
+        textField.leftView = paddingView
+        textField.leftViewMode = .always
         return textField
     }()
+
     
     private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = "Password"
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 10
+        textField.layer.borderColor = UIColor.gray.cgColor
+        textField.layer.borderWidth = 1.0
+        textField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        textField.textColor = .black
+        // Add a padding view to the left of the text field
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
+        textField.leftView = paddingView
+        textField.leftViewMode = .always
         return textField
     }()
     
@@ -80,22 +95,18 @@ class LoginViewController: UIViewController {
             logoImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
             logoImage.heightAnchor.constraint(equalToConstant: 300),
             logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
             userTextField.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 16),
             userTextField.heightAnchor.constraint(equalToConstant: 50),
             userTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             userTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            
             passwordTextField.topAnchor.constraint(equalTo: userTextField.bottomAnchor, constant: 16),
             passwordTextField.heightAnchor.constraint(equalToConstant: 50),
             passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            
             buttonEnter.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16),
             buttonEnter.heightAnchor.constraint(equalToConstant: 50),
             buttonEnter.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             buttonEnter.widthAnchor.constraint(equalToConstant: 100),
-            
             resgisterBtn.topAnchor.constraint(equalTo: buttonEnter.bottomAnchor, constant: 16),
             resgisterBtn.heightAnchor.constraint(equalToConstant: 50),
             resgisterBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),

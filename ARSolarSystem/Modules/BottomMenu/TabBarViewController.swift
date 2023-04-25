@@ -11,6 +11,7 @@ class TabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Sets up view controllers for the tab bar.
         viewControllers = [
             createNavController(for: SolarSystemViewController(), title: "Discover", imageName: "globe.americas"),
             createNavController(for: ProfileViewController(), title: "Profile", imageName: "person.circle"),
@@ -22,6 +23,7 @@ class TabBarViewController: UITabBarController {
         tabBar.tintColor = .white
     }
     
+    // Creates a tab bar item with a specified title and image name
     private func createTabBarItem(title: String, imageName: String) -> UITabBarItem {
         let image = UIImage(systemName: imageName)?.withRenderingMode(.alwaysTemplate)
         let tabBarItem = UITabBarItem(title: title, image: image, selectedImage: image)
@@ -29,6 +31,7 @@ class TabBarViewController: UITabBarController {
         return tabBarItem
     }
     
+    // Creates a navigation controller for a view controller with a specified title and image name
     private func createNavController(for rootViewController: UIViewController,
                                      title: String,
                                      imageName: String) -> UIViewController {
@@ -43,6 +46,7 @@ class TabBarViewController: UITabBarController {
         return navController
     }
     
+    // Sets the toolbar appearance of a navigation controller with a specified background color
     private func setToolbarAppereance(backgroundColor: UIColor = .blue, navController: UINavigationController?) {
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.configureWithOpaqueBackground()
