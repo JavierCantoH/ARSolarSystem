@@ -204,8 +204,12 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
                 }
             }
             if tappedNode.name != "sun" {
-                // increase size of tappedNodeCopy
-                tappedNodeCopy.scale = SCNVector3(x: 8, y: 8, z: 8)
+                tappedNode.childNodes.forEach { node in
+                    if tappedNode.name != "jupiter" || tappedNode.name != "saturn" || tappedNode.name != "uranus" || tappedNode.name != "neptune" {
+                        // increase size of tappedNodeCopy
+                        tappedNodeCopy.scale = SCNVector3(x: 8, y: 8, z: 8)
+                    }
+                }
                 // Move the tapped planet to the center of the screen
                 let action = SCNAction.move(to: SCNVector3(0, 0, 0), duration: 0.5)
                 tappedNodeCopy.runAction(action)
