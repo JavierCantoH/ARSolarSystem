@@ -55,6 +55,10 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
     
     // keep track of the current planet where the user clicked
     private var currentPlanet = SCNNode()
+    private var currentPlanetTitle = SCNNode()
+    
+    // Declare the tap gesture recognizer as a property
+    var tapGesture: UITapGestureRecognizer!
     
     private func constrainstSetup() {
         NSLayoutConstraint.activate([
@@ -181,19 +185,22 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         baseNode.position = SCNVector3(x: 0, y: -0.5, z: -1)
         
         // adding the gesture recognizer to detect which planet the user is clicking
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
         
         let scene = SCNScene()
         sceneView.scene = scene
-        sceneView.addGestureRecognizer(tap)
+        sceneView.autoenablesDefaultLighting = true
+        sceneView.addGestureRecognizer(tapGesture)
         sceneView.scene.rootNode.addChildNode(baseNode)
     }
     
-    @objc func handleTap(rec: UITapGestureRecognizer){
+    @objc func handleTap(rec: UITapGestureRecognizer) {
         let location = rec.location(in: sceneView)
         let hitTestResults = sceneView.hitTest(location, options: [.rootNode: baseNode])
         guard let tappedNode = hitTestResults.first?.node else { return }
         if tappedNode.name != "saturn_loop" && tappedNode.name != "ringNode" {
+            // Remove the gesture recognizer to prevent further taps
+            sceneView.removeGestureRecognizer(tapGesture)
             // copy the node
             let tappedNodeCopy = tappedNode.clone()
             baseNode.addChildNode(tappedNodeCopy)
@@ -204,16 +211,16 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
                 }
             }
             if tappedNode.name != "sun" {
-                tappedNode.childNodes.forEach { node in
-                    if tappedNode.name != "jupiter" || tappedNode.name != "saturn" || tappedNode.name != "uranus" || tappedNode.name != "neptune" {
-                        // increase size of tappedNodeCopy
-                        tappedNodeCopy.scale = SCNVector3(x: 8, y: 8, z: 8)
-                    }
+                if tappedNode.name != "jupiter" && tappedNode.name != "saturn" && tappedNode.name != "uranus" && tappedNode.name != "neptune" {
+                    // scale the small planets
+                    tappedNodeCopy.scale = SCNVector3(x: 8, y: 8, z: 8)
                 }
                 // Move the tapped planet to the center of the screen
                 let action = SCNAction.move(to: SCNVector3(0, 0, 0), duration: 0.5)
                 tappedNodeCopy.runAction(action)
             }
+            // planet title
+            baseNode.addChildNode(createText(planetName: tappedNodeCopy.name ?? "", planetNode: tappedNodeCopy))
             // check which node is tapped
             checkTappedNodeInfo(tappedNode: tappedNodeCopy)
             currentPlanet = tappedNodeCopy
@@ -223,8 +230,8 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
     
     @objc private func goBack() {
         baseNode.childNodes.forEach { node in
-            // delete the tappedNodeCopy
-            if node == currentPlanet {
+            // delete the tappedNodeCopy and title
+            if node == currentPlanet || node == currentPlanetTitle {
                 node.removeFromParentNode()
             }
             // show the rest of the solar system
@@ -235,6 +242,8 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         backRoundBtn.isHidden = true
         infoLabel.isHidden = true
         infoLabel.text = ""
+        // Add the gesture recognizer back to enable taps again
+        sceneView.addGestureRecognizer(tapGesture)
     }
     
     private func checkTappedNodeInfo(tappedNode: SCNNode) {
@@ -265,6 +274,25 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         }
     }
 
+    private func createText(planetName: String, planetNode: SCNNode) -> SCNNode {
+        let text = SCNText(string: planetName.capitalized, extrusionDepth: 2)
+        let material = SCNMaterial()
+        material.diffuse.contents = UIColor.blue
+        text.materials = [material]
+        // calculate the size of the planet node
+        let (min, max) = planetNode.boundingBox
+        let planetNodeSize = SCNVector3Make(max.x - min.x, max.y - min.y, max.z - min.z)
+        let node = SCNNode()
+        node.name = planetName
+        // adjust the position of the text node based on the size of the planet node
+        let action = SCNAction.move(to: SCNVector3(0, planetNodeSize.y * planetNode.scale.y / 2.0 + 0.02, 0), duration: 0.5)
+        node.runAction(action)
+        //node.position = SCNVector3(x: planetNode.position.x, y: planetNodeSize.y * planetNode.scale.y / 2.0 + 0.02, z: 0)
+        node.scale = SCNVector3(x:0.01, y:0.01, z:0.01)
+        node.geometry = text
+        currentPlanetTitle = node
+        return node
+    }
     
     private func createPlanet(radius: Float, image: String) -> SCNNode {
         let planet = SCNSphere(radius: CGFloat(radius))
