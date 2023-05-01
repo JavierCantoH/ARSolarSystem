@@ -57,6 +57,9 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
     private var currentPlanet = SCNNode()
     private var currentPlanetTitle = SCNNode()
     
+    // Declare the tap gesture recognizer as a property
+    var tapGesture: UITapGestureRecognizer!
+    
     private func constrainstSetup() {
         NSLayoutConstraint.activate([
             sceneView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -182,12 +185,12 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         baseNode.position = SCNVector3(x: 0, y: -0.5, z: -1)
         
         // adding the gesture recognizer to detect which planet the user is clicking
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
         
         let scene = SCNScene()
         sceneView.scene = scene
         sceneView.autoenablesDefaultLighting = true
-        sceneView.addGestureRecognizer(tap)
+        sceneView.addGestureRecognizer(tapGesture)
         sceneView.scene.rootNode.addChildNode(baseNode)
     }
     
@@ -196,6 +199,8 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         let hitTestResults = sceneView.hitTest(location, options: [.rootNode: baseNode])
         guard let tappedNode = hitTestResults.first?.node else { return }
         if tappedNode.name != "saturn_loop" && tappedNode.name != "ringNode" {
+            // Remove the gesture recognizer to prevent further taps
+            sceneView.removeGestureRecognizer(tapGesture)
             // copy the node
             let tappedNodeCopy = tappedNode.clone()
             baseNode.addChildNode(tappedNodeCopy)
@@ -214,7 +219,7 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
                 let action = SCNAction.move(to: SCNVector3(0, 0, 0), duration: 0.5)
                 tappedNodeCopy.runAction(action)
             }
-            // plaet title
+            // planet title
             baseNode.addChildNode(createText(planetName: tappedNodeCopy.name ?? "", planetNode: tappedNodeCopy))
             // check which node is tapped
             checkTappedNodeInfo(tappedNode: tappedNodeCopy)
@@ -237,8 +242,8 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         backRoundBtn.isHidden = true
         infoLabel.isHidden = true
         infoLabel.text = ""
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
-        sceneView.addGestureRecognizer(tap)
+        // Add the gesture recognizer back to enable taps again
+        sceneView.addGestureRecognizer(tapGesture)
     }
     
     private func checkTappedNodeInfo(tappedNode: SCNNode) {
@@ -270,7 +275,7 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
     }
 
     private func createText(planetName: String, planetNode: SCNNode) -> SCNNode {
-        let text = SCNText(string: planetName, extrusionDepth: 2)
+        let text = SCNText(string: planetName.capitalized, extrusionDepth: 2)
         let material = SCNMaterial()
         material.diffuse.contents = UIColor.blue
         text.materials = [material]
