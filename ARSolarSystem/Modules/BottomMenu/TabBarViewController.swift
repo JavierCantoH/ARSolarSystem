@@ -14,6 +14,7 @@ class TabBarViewController: UITabBarController {
         // Sets up view controllers for the tab bar.
         viewControllers = [
             createNavController(for: SolarSystemViewController(), title: "Discover", imageName: "globe.americas"),
+            createNavController(for: TasksViewController(), title: "Tasks", imageName: "checklist"),
             createNavController(for: ProfileViewController(), title: "Profile", imageName: "person.circle"),
         ]
     }

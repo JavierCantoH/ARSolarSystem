@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		EC70606D29E9E06C00F729A7 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC70606C29E9E06C00F729A7 /* TabBarViewController.swift */; };
 		EC70607029E9E12B00F729A7 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC70606F29E9E12B00F729A7 /* ProfileViewController.swift */; };
+		EC764B522A047EDA0094E0F2 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC764B512A047EDA0094E0F2 /* TasksViewController.swift */; };
+		EC764B552A04B4AF0094E0F2 /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC764B542A04B4AF0094E0F2 /* TodoItem.swift */; };
 		ECD2913E29CF8DBE002DFAFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD2913D29CF8DBE002DFAFA /* AppDelegate.swift */; };
 		ECD2914029CF8DBE002DFAFA /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ECD2913F29CF8DBE002DFAFA /* art.scnassets */; };
 		ECD2914229CF8DBE002DFAFA /* SolarSystemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD2914129CF8DBE002DFAFA /* SolarSystemViewController.swift */; };
@@ -22,6 +24,8 @@
 /* Begin PBXFileReference section */
 		EC70606C29E9E06C00F729A7 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		EC70606F29E9E12B00F729A7 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		EC764B512A047EDA0094E0F2 /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
+		EC764B542A04B4AF0094E0F2 /* TodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
 		ECD2913A29CF8DBE002DFAFA /* ARSolarSystem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARSolarSystem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECD2913D29CF8DBE002DFAFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECD2913F29CF8DBE002DFAFA /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -47,6 +51,7 @@
 		EC70606629E9D05500F729A7 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				EC764B502A047EC10094E0F2 /* Tasks */,
 				EC70606E29E9E11800F729A7 /* Profile */,
 				EC70606B29E9E03700F729A7 /* BottomMenu */,
 				EC70606A29E9D07E00F729A7 /* Main */,
@@ -103,6 +108,23 @@
 				EC70606F29E9E12B00F729A7 /* ProfileViewController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		EC764B502A047EC10094E0F2 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				EC764B532A04B4A30094E0F2 /* Model */,
+				EC764B512A047EDA0094E0F2 /* TasksViewController.swift */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
+		EC764B532A04B4A30094E0F2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EC764B542A04B4AF0094E0F2 /* TodoItem.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		ECD2913129CF8DBE002DFAFA = {
@@ -205,6 +227,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECD291AD29E5E970002DFAFA /* LoginViewController.swift in Sources */,
+				EC764B552A04B4AF0094E0F2 /* TodoItem.swift in Sources */,
+				EC764B522A047EDA0094E0F2 /* TasksViewController.swift in Sources */,
 				ECD291AF29E5E979002DFAFA /* RegisterViewController.swift in Sources */,
 				ECD291AB29E5E83F002DFAFA /* MainViewController.swift in Sources */,
 				ECD2914229CF8DBE002DFAFA /* SolarSystemViewController.swift in Sources */,
