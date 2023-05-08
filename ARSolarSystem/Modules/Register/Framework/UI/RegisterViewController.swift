@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast
 
 class RegisterViewController: UIViewController {
     
@@ -85,17 +86,37 @@ class RegisterViewController: UIViewController {
         return btn
     }()
     
+    private lazy var toastStyleMissElements: ToastStyle = {
+        var style = ToastStyle()
+        style.backgroundColor = .red
+        style.titleColor = .white
+        style.imageSize = CGSize(width: 50, height: 50)
+        return style
+    }()
+    
+    private lazy var toastStyleComplete: ToastStyle = {
+        var style = ToastStyle()
+        style.backgroundColor = .green
+        style.titleColor = .white
+        style.imageSize = CGSize(width: 50, height: 50)
+        return style
+    }()
+    
     @objc private func loginAction() {
         navigationController?.popViewController(animated: true)
     }
     
     @objc private func registerAction() {
-        
+        presenter?.registerUser(user: UserCredentials(email: emailTextfield.text ?? "", password: passwordTextfield.text ?? ""))
     }
+    
+    var presenter: RegisterPresenterProtocol?
+    var registerSuccess: ((UserResult) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        presenter?.attachView(view: self)
     }
     
     private func setupView() {
@@ -136,5 +157,31 @@ class RegisterViewController: UIViewController {
             loginBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             loginBtn.widthAnchor.constraint(equalToConstant: 300),
         ])
+    }
+}
+
+extension RegisterViewController: RegisterViewProtocol {
+    
+    func loginSuccess(user: UserResult) {
+        if let image = UIImage(systemName: "checkmark.circle") {
+            let tintedImage = image.withTintColor(.white, renderingMode: .alwaysOriginal)
+            view.makeToast("Welcome!", duration: 2.0, position: .top, title: title, image: tintedImage, style: toastStyleComplete)
+            registerSuccess?(user)
+        }
+    }
+    
+    func showLoader() {
+        view.makeToastActivity(.bottom)
+    }
+    
+    func hideLoader() {
+        view.hideToastActivity()
+    }
+    
+    func showError(message: String) {
+        if let image = UIImage(systemName: "exclamationmark.square.fill") {
+            let tintedImage = image.withTintColor(.white, renderingMode: .alwaysOriginal)
+            view.makeToast(message, duration: 2.0, position: .center, title: title, image: tintedImage, style: toastStyleMissElements)
+        }
     }
 }

@@ -7,6 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC03BFE42A0592DA006AC128 /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03BFE32A0592DA006AC128 /* UseCase.swift */; };
+		EC03BFE72A05933B006AC128 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = EC03BFE62A05933B006AC128 /* Alamofire */; };
+		EC03BFEA2A059354006AC128 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EC03BFE92A059354006AC128 /* RxSwift */; };
+		EC03BFF32A0593C6006AC128 /* RegisterDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03BFF22A0593C6006AC128 /* RegisterDataSourceProtocol.swift */; };
+		EC03BFF52A059408006AC128 /* UserResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03BFF42A059408006AC128 /* UserResult.swift */; };
+		EC03BFF72A05945C006AC128 /* RegisterRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03BFF62A05945C006AC128 /* RegisterRepository.swift */; };
+		EC03BFF92A059470006AC128 /* RegisterRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03BFF82A059470006AC128 /* RegisterRepositoryProtocol.swift */; };
+		EC03BFFB2A0594F9006AC128 /* RegisterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03BFFA2A0594F9006AC128 /* RegisterUseCase.swift */; };
+		EC03BFFD2A059546006AC128 /* RegisterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03BFFC2A059546006AC128 /* RegisterDataSource.swift */; };
+		EC03C0002A05964C006AC128 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03BFFF2A05964C006AC128 /* BaseView.swift */; };
+		EC03C0022A059689006AC128 /* RegisterPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03C0012A059689006AC128 /* RegisterPresenterProtocol.swift */; };
+		EC03C0042A059695006AC128 /* RegisterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03C0032A059695006AC128 /* RegisterPresenter.swift */; };
+		EC03C0062A0596A1006AC128 /* RegisterViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03C0052A0596A1006AC128 /* RegisterViewProtocol.swift */; };
+		EC03C0082A05974E006AC128 /* RegisterRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03C0072A05974E006AC128 /* RegisterRouterProtocol.swift */; };
+		EC03C00A2A059756006AC128 /* RegisterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03C0092A059756006AC128 /* RegisterRouter.swift */; };
+		EC03C00D2A0599EA006AC128 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = EC03C00C2A0599EA006AC128 /* Toast */; };
+		EC2573572A098BB40071A0F1 /* UserCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2573562A098BB40071A0F1 /* UserCredentials.swift */; };
+		EC25735A2A098D790071A0F1 /* SwiftJWT in Frameworks */ = {isa = PBXBuildFile; productRef = EC2573592A098D790071A0F1 /* SwiftJWT */; };
+		EC25735D2A0991880071A0F1 /* MyClaims.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC25735C2A0991880071A0F1 /* MyClaims.swift */; };
 		EC70606D29E9E06C00F729A7 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC70606C29E9E06C00F729A7 /* TabBarViewController.swift */; };
 		EC70607029E9E12B00F729A7 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC70606F29E9E12B00F729A7 /* ProfileViewController.swift */; };
 		EC764B522A047EDA0094E0F2 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC764B512A047EDA0094E0F2 /* TasksViewController.swift */; };
@@ -22,6 +41,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EC03BFE32A0592DA006AC128 /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
+		EC03BFF22A0593C6006AC128 /* RegisterDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataSourceProtocol.swift; sourceTree = "<group>"; };
+		EC03BFF42A059408006AC128 /* UserResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResult.swift; sourceTree = "<group>"; };
+		EC03BFF62A05945C006AC128 /* RegisterRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRepository.swift; sourceTree = "<group>"; };
+		EC03BFF82A059470006AC128 /* RegisterRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRepositoryProtocol.swift; sourceTree = "<group>"; };
+		EC03BFFA2A0594F9006AC128 /* RegisterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUseCase.swift; sourceTree = "<group>"; };
+		EC03BFFC2A059546006AC128 /* RegisterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataSource.swift; sourceTree = "<group>"; };
+		EC03BFFF2A05964C006AC128 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		EC03C0012A059689006AC128 /* RegisterPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPresenterProtocol.swift; sourceTree = "<group>"; };
+		EC03C0032A059695006AC128 /* RegisterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPresenter.swift; sourceTree = "<group>"; };
+		EC03C0052A0596A1006AC128 /* RegisterViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewProtocol.swift; sourceTree = "<group>"; };
+		EC03C0072A05974E006AC128 /* RegisterRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRouterProtocol.swift; sourceTree = "<group>"; };
+		EC03C0092A059756006AC128 /* RegisterRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRouter.swift; sourceTree = "<group>"; };
+		EC2573562A098BB40071A0F1 /* UserCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentials.swift; sourceTree = "<group>"; };
+		EC25735C2A0991880071A0F1 /* MyClaims.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClaims.swift; sourceTree = "<group>"; };
 		EC70606C29E9E06C00F729A7 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		EC70606F29E9E12B00F729A7 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EC764B512A047EDA0094E0F2 /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
@@ -42,12 +76,148 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC03C00D2A0599EA006AC128 /* Toast in Frameworks */,
+				EC03BFEA2A059354006AC128 /* RxSwift in Frameworks */,
+				EC25735A2A098D790071A0F1 /* SwiftJWT in Frameworks */,
+				EC03BFE72A05933B006AC128 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC03BFDC2A059276006AC128 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				EC03BFEB2A059364006AC128 /* DataSource */,
+				EC03BFEC2A05936A006AC128 /* Repository */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		EC03BFDD2A05927C006AC128 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				EC03BFED2A059378006AC128 /* Repository */,
+				EC03BFEE2A05937E006AC128 /* UseCase */,
+				EC03BFEF2A059383006AC128 /* Model */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		EC03BFDE2A059281006AC128 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				EC03BFF02A059396006AC128 /* Data */,
+				EC03BFF12A05939C006AC128 /* Presenter */,
+				EC03BFE02A0592A1006AC128 /* UI */,
+				EC03BFDF2A059296006AC128 /* Router */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
+		EC03BFDF2A059296006AC128 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				EC03C0072A05974E006AC128 /* RegisterRouterProtocol.swift */,
+				EC03C0092A059756006AC128 /* RegisterRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		EC03BFE02A0592A1006AC128 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				ECD291AE29E5E979002DFAFA /* RegisterViewController.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		EC03BFE12A0592B5006AC128 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				EC25735B2A0991790071A0F1 /* Networking */,
+				EC03BFE22A0592C0006AC128 /* Architecture */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		EC03BFE22A0592C0006AC128 /* Architecture */ = {
+			isa = PBXGroup;
+			children = (
+				EC03BFFF2A05964C006AC128 /* BaseView.swift */,
+				EC03BFE32A0592DA006AC128 /* UseCase.swift */,
+			);
+			path = Architecture;
+			sourceTree = "<group>";
+		};
+		EC03BFEB2A059364006AC128 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				EC03BFF22A0593C6006AC128 /* RegisterDataSourceProtocol.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		EC03BFEC2A05936A006AC128 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				EC03BFF62A05945C006AC128 /* RegisterRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		EC03BFED2A059378006AC128 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				EC03BFF82A059470006AC128 /* RegisterRepositoryProtocol.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		EC03BFEE2A05937E006AC128 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				EC03BFFA2A0594F9006AC128 /* RegisterUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		EC03BFEF2A059383006AC128 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EC03BFF42A059408006AC128 /* UserResult.swift */,
+				EC2573562A098BB40071A0F1 /* UserCredentials.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EC03BFF02A059396006AC128 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				EC03BFFC2A059546006AC128 /* RegisterDataSource.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		EC03BFF12A05939C006AC128 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				EC03C0012A059689006AC128 /* RegisterPresenterProtocol.swift */,
+				EC03C0032A059695006AC128 /* RegisterPresenter.swift */,
+				EC03C0052A0596A1006AC128 /* RegisterViewProtocol.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		EC25735B2A0991790071A0F1 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				EC25735C2A0991880071A0F1 /* MyClaims.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		EC70606629E9D05500F729A7 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -81,7 +251,9 @@
 		EC70606929E9D06E00F729A7 /* Register */ = {
 			isa = PBXGroup;
 			children = (
-				ECD291AE29E5E979002DFAFA /* RegisterViewController.swift */,
+				EC03BFDC2A059276006AC128 /* Data */,
+				EC03BFDD2A05927C006AC128 /* Domain */,
+				EC03BFDE2A059281006AC128 /* Framework */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -146,6 +318,7 @@
 		ECD2913C29CF8DBE002DFAFA /* ARSolarSystem */ = {
 			isa = PBXGroup;
 			children = (
+				EC03BFE12A0592B5006AC128 /* Core */,
 				EC70606629E9D05500F729A7 /* Modules */,
 				ECD2913D29CF8DBE002DFAFA /* AppDelegate.swift */,
 				ECD2913F29CF8DBE002DFAFA /* art.scnassets */,
@@ -171,6 +344,12 @@
 			dependencies = (
 			);
 			name = ARSolarSystem;
+			packageProductDependencies = (
+				EC03BFE62A05933B006AC128 /* Alamofire */,
+				EC03BFE92A059354006AC128 /* RxSwift */,
+				EC03C00C2A0599EA006AC128 /* Toast */,
+				EC2573592A098D790071A0F1 /* SwiftJWT */,
+			);
 			productName = ARSolarSystem;
 			productReference = ECD2913A29CF8DBE002DFAFA /* ARSolarSystem.app */;
 			productType = "com.apple.product-type.application";
@@ -199,6 +378,12 @@
 				Base,
 			);
 			mainGroup = ECD2913129CF8DBE002DFAFA;
+			packageReferences = (
+				EC03BFE52A05933B006AC128 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				EC03BFE82A059354006AC128 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				EC03C00B2A0599EA006AC128 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				EC2573582A098D790071A0F1 /* XCRemoteSwiftPackageReference "Swift-JWT" */,
+			);
 			productRefGroup = ECD2913B29CF8DBE002DFAFA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -226,13 +411,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC25735D2A0991880071A0F1 /* MyClaims.swift in Sources */,
+				EC03BFF92A059470006AC128 /* RegisterRepositoryProtocol.swift in Sources */,
+				EC03C0022A059689006AC128 /* RegisterPresenterProtocol.swift in Sources */,
 				ECD291AD29E5E970002DFAFA /* LoginViewController.swift in Sources */,
 				EC764B552A04B4AF0094E0F2 /* TodoItem.swift in Sources */,
+				EC03C0002A05964C006AC128 /* BaseView.swift in Sources */,
+				EC03BFFD2A059546006AC128 /* RegisterDataSource.swift in Sources */,
+				EC03BFFB2A0594F9006AC128 /* RegisterUseCase.swift in Sources */,
+				EC03BFF32A0593C6006AC128 /* RegisterDataSourceProtocol.swift in Sources */,
+				EC03C0082A05974E006AC128 /* RegisterRouterProtocol.swift in Sources */,
 				EC764B522A047EDA0094E0F2 /* TasksViewController.swift in Sources */,
 				ECD291AF29E5E979002DFAFA /* RegisterViewController.swift in Sources */,
+				EC03BFF72A05945C006AC128 /* RegisterRepository.swift in Sources */,
 				ECD291AB29E5E83F002DFAFA /* MainViewController.swift in Sources */,
+				EC2573572A098BB40071A0F1 /* UserCredentials.swift in Sources */,
+				EC03BFE42A0592DA006AC128 /* UseCase.swift in Sources */,
 				ECD2914229CF8DBE002DFAFA /* SolarSystemViewController.swift in Sources */,
+				EC03C00A2A059756006AC128 /* RegisterRouter.swift in Sources */,
+				EC03BFF52A059408006AC128 /* UserResult.swift in Sources */,
+				EC03C0062A0596A1006AC128 /* RegisterViewProtocol.swift in Sources */,
 				EC70607029E9E12B00F729A7 /* ProfileViewController.swift in Sources */,
+				EC03C0042A059695006AC128 /* RegisterPresenter.swift in Sources */,
 				EC70606D29E9E06C00F729A7 /* TabBarViewController.swift in Sources */,
 				ECD2913E29CF8DBE002DFAFA /* AppDelegate.swift in Sources */,
 			);
@@ -450,6 +650,64 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EC03BFE52A05933B006AC128 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		EC03BFE82A059354006AC128 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+		EC03C00B2A0599EA006AC128 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		EC2573582A098D790071A0F1 /* XCRemoteSwiftPackageReference "Swift-JWT" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/IBM-Swift/Swift-JWT.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EC03BFE62A05933B006AC128 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC03BFE52A05933B006AC128 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		EC03BFE92A059354006AC128 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC03BFE82A059354006AC128 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		EC03C00C2A0599EA006AC128 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC03C00B2A0599EA006AC128 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
+		EC2573592A098D790071A0F1 /* SwiftJWT */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC2573582A098D790071A0F1 /* XCRemoteSwiftPackageReference "Swift-JWT" */;
+			productName = SwiftJWT;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ECD2913229CF8DBE002DFAFA /* Project object */;
 }
