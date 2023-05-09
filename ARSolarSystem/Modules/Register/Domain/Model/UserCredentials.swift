@@ -9,5 +9,6 @@ import Foundation
 
 struct UserCredentials: Codable {
     let email: String
+    let name: String
     let password: String
 }

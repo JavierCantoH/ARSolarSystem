@@ -35,6 +35,22 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         return button
     }()
     
+    private lazy var nextFactButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Siguiente", for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = .blue
+        button.clipsToBounds = true
+        
+        button.layer.cornerRadius = 10.0
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.borderWidth = 1.0
+        button.isHidden = true
+        button.addTarget(self, action: #selector(nextFactButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     private lazy var infoLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -60,6 +76,8 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
     // Declare the tap gesture recognizer as a property
     var tapGesture: UITapGestureRecognizer!
     
+    var currentFactIndex = 0
+    
     private func constrainstSetup() {
         NSLayoutConstraint.activate([
             sceneView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -74,6 +92,10 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
             infoLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             infoLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             infoLabel.heightAnchor.constraint(equalToConstant: 100),
+            nextFactButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            nextFactButton.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 5),
+            nextFactButton.widthAnchor.constraint(equalToConstant: 90),
+            nextFactButton.heightAnchor.constraint(equalToConstant: 40),
         ])
     }
     
@@ -82,6 +104,7 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         view.addSubview(sceneView)
         view.addSubview(backRoundBtn)
         view.addSubview(infoLabel)
+        view.addSubview(nextFactButton)
         constrainstSetup()
         sceneView.delegate = self
         sceneView.showsStatistics = false
@@ -242,35 +265,35 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         backRoundBtn.isHidden = true
         infoLabel.isHidden = true
         infoLabel.text = ""
+        nextFactButton.isHidden = true
         // Add the gesture recognizer back to enable taps again
         sceneView.addGestureRecognizer(tapGesture)
     }
     
+    @objc private func nextFactButtonTapped() {
+        guard let currentPlanetName = currentPlanet.name,
+              let facts = planetFacts[currentPlanetName],
+              currentFactIndex < facts.count else {
+            return
+        }
+        
+        let fact = facts[currentFactIndex]
+        currentFactIndex += 1
+        
+        if currentFactIndex >= facts.count {
+            currentFactIndex = 0
+        }
+        
+        infoLabel.text = fact
+    }
+    
     private func checkTappedNodeInfo(tappedNode: SCNNode) {
         infoLabel.isHidden = false
-        switch tappedNode.name {
-        case "sun":
-            infoLabel.text = "Sun\nMass: 1.99 x 10^30 kg\nRadius: 695,700 km"
-        case "mercury":
-            infoLabel.text = "Mercury\nMass: 3.30 x 10^23 kg\nRadius: 2,440 km"
-        case "venus":
-            infoLabel.text = "Venus\nMass: 4.87 x 10^24 kg\nRadius: 6,052 km"
-        case "earth":
-            infoLabel.text = "Earth\nMass: 5.97 x 10^24 kg\nRadius: 6,371 km"
-        case "mars":
-            infoLabel.text = "Mars\nMass: 6.39 x 10^23 kg\nRadius: 3,390 km"
-        case "jupiter":
-            infoLabel.text = "Jupiter\nMass: 1.90 x 10^27 kg\nRadius: 69,911 km"
-        case "saturn":
-            infoLabel.text = "Saturn\nMass: 5.68 x 10^26 kg\nRadius: 58,232 km"
-        case "uranus":
-            infoLabel.text = "Uranus\nMass: 8.68 x 10^25 kg\nRadius: 25,362 km"
-        case "neptune":
-            infoLabel.text = "Neptune\nMass: 1.02 x 10^26 kg\nRadius: 24,622 km"
-        case "moon":
-            infoLabel.text = "Moon\nMass: 7.34 x 10^22 kg\nRadius: 1,737 km"
-        default:
-            infoLabel.text = "No information available"
+        nextFactButton.isHidden = false
+        currentPlanet = tappedNode
+        currentFactIndex = 0
+        if let planetName = currentPlanet.name, let facts = planetFacts[planetName]{
+            infoLabel.text = facts[0]
         }
     }
 
@@ -329,4 +352,48 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillDisappear(animated)
         sceneView.session.pause()
     }
+    
+    let planetFacts = [
+        "sun": [
+            "El Sol es la estrella más cercana a la Tierra.",
+            "El Sol es una bola de gas caliente, cuyo diámetro es 109 veces el de la Tierra."
+        ],
+        "moon": [
+            "La Luna es el satélite natural de la Tierra.",
+            "La Luna es el quinto satélite más grande del sistema solar."
+        ],
+        "saturn": [
+            "Saturno es el segundo planeta más grande del sistema solar.",
+            "Saturno es conocido por sus anillos.",
+            "El anillo de rocas que lo rodea no pasa de 1 km de grosor."
+        ],
+        "mercury": [
+            "Mercurio es el planeta mas pequeño del sistema solar.",
+            "Mercurio es el planeta más cercano al Sol.",
+            "Mercurio es el planeta con la orbita más pequeña del sistema solar.",
+            "Un año en Mercurio son 3 meses en la Tierra."
+        ],
+        "venus": [
+            "Venus es el planeta más caliente del sistema solar, con 876 grados Farenheit.",
+            "Venus es caliente por su atmósfera llena de dióxido de carbono",
+            "Venus tambien cuenta con rios de lava"
+        ],
+        "mars": [
+            "Marte tuvo vida dentro de su planeta hace 3.7 billones de años.",
+            "Alguna vez Marte tuvo una superficie de agua."
+        ],
+        "earth": [
+            "El sistema de agua dentro de la Tierra hace posible que haya vida."
+        ],
+        "jupiter": [
+            "Jupiter es el planeta más grande del sistema solar."
+        ],
+        "uranus": [
+            "Urano es el unico planeta que gira de lado."
+        ],
+        "neptune": [
+            "Neptuno es el planeta que se encuentra más alejado del sol.",
+            "Neptuno es el planeta más frio del sistema solar, llegando a -375 grados Farenheit."
+        ],
+    ]
 }

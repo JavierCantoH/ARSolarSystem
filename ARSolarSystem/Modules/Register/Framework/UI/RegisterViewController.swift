@@ -107,7 +107,7 @@ class RegisterViewController: UIViewController {
     }
     
     @objc private func registerAction() {
-        presenter?.registerUser(user: UserCredentials(email: emailTextfield.text ?? "", password: passwordTextfield.text ?? ""))
+        presenter?.registerUser(user: UserCredentials(email: emailTextfield.text ?? "", name: nameTextfield.text ?? "", password: passwordTextfield.text ?? ""))
     }
     
     var presenter: RegisterPresenterProtocol?
