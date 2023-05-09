@@ -15,6 +15,11 @@ class TasksViewController: UIViewController {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .white
+        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        tableView.showsVerticalScrollIndicator = false
+        tableView.separatorInset = UIEdgeInsets(top: 20, left: 16, bottom: 20, right: 16)
         return tableView
     }()
     
@@ -34,10 +39,10 @@ class TasksViewController: UIViewController {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
         ])
     }
     
@@ -48,10 +53,15 @@ class TasksViewController: UIViewController {
     }
     
     @objc private func addTodo() {
-        let alert = UIAlertController(title: "Add Todo", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Nueva Tarea", message: nil, preferredStyle: .alert)
         alert.addTextField()
-        let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
-            guard let title = alert.textFields?.first?.text else { return }
+        let addAction = UIAlertAction(title: "Agregar", style: .default) { [weak self] _ in
+            guard let title = alert.textFields?.first?.text, !title.isEmpty else {
+                let emptyTitleAlert = UIAlertController(title: "Error", message: "Please enter a title for the task.", preferredStyle: .alert)
+                emptyTitleAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self?.present(emptyTitleAlert, animated: true, completion: nil)
+                return
+            }
             self?.addTodoItem(title: title)
         }
         alert.addAction(addAction)
@@ -59,9 +69,13 @@ class TasksViewController: UIViewController {
     }
     
     private func addTodoItem(title: String) {
-        let todoItem = TodoItem(title: title, completed: false)
+        let todoItem = TodoItem(title: title , completed: false)
         todoItems.append(todoItem)
         tableView.reloadData()
+        let contentHeight = tableView.contentSize.height
+        let tableViewHeight = tableView.frame.size.height
+        let bottomInset = max(tableViewHeight - contentHeight, 0)
+        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8 + bottomInset, right: 0)
     }
     
     private func updateTodoItem(at index: Int, withTitle title: String) {
@@ -87,8 +101,36 @@ extension TasksViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let todoItem = todoItems[indexPath.row]
         cell.textLabel?.text = todoItem.title
+        cell.backgroundColor = .lightGray
+        cell.textLabel?.font = UIFont(name: "Avenir-light", size: 25)
+        cell.textLabel?.textAlignment = .center
+        cell.layer.cornerRadius = 30
+        cell.layer.masksToBounds = true
+        cell.textLabel?.numberOfLines = 0 // set the number of lines to 0
+        cell.textLabel?.lineBreakMode = .byWordWrapping
+        cell.textLabel?.frame = cell.bounds // center the label vertically
         cell.accessoryType = todoItem.completed ? .checkmark : .none
+        
+        let bottomMargin = CGFloat(16)
+        let topMargin = CGFloat(0)
+        cell.contentView.frame = cell.contentView.frame.inset(by: UIEdgeInsets(top: topMargin, left: 0, bottom: bottomMargin, right: 0))
+        
+        let separatorView = UIView()
+        separatorView.backgroundColor = .white
+        separatorView.translatesAutoresizingMaskIntoConstraints = false
+        cell.contentView.addSubview(separatorView)
+        NSLayoutConstraint.activate([
+            separatorView.heightAnchor.constraint(equalToConstant: 8),
+            separatorView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor),
+            separatorView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor),
+            separatorView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor)
+        ])
+
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80.0 // Set cell height
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -100,7 +142,7 @@ extension TasksViewController: UITableViewDataSource, UITableViewDelegate {
             deleteTodoItem(at: indexPath.row)
         }
     }
-
+    
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let editAction = UIContextualAction(style: .normal, title: "Edit") { [weak self] _, _, completionHandler in
             self?.editTodoItem(at: indexPath.row)
