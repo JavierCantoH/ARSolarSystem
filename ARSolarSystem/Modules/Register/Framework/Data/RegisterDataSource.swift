@@ -26,20 +26,17 @@ class RegisterDataSource: RegisterDataSourceProtocol {
     
     private func requestRegister(user: UserCredentials) -> Single<UserResult> {
         return Single.create { observable in
-            let issuer = "ARSolarSystem"
-            let subject = user.email
-            let expirationTime = Date().addingTimeInterval(3600) // expira en 1 hora
-            let claims = MyClaims(issuer: issuer, subject: subject, expirationTime: expirationTime)
-            var jwt = JWT(claims: claims)
-            let privateKey = "mysecretkey".data(using: .utf8)!
-            let signer = JWTSigner.hs256(key: privateKey)
-            let jwtString = try! jwt.sign(using: signer)
-            let headers: HTTPHeaders = [
-                "Authorization": "Bearer \(jwtString)"
+            let parameters = [
+                "FirstName": user.firstName,
+                "LastName": user.lastName,
+                "Alias": user.alias,
+                "Email": user.email,
+                "Password": user.password
             ]
-            AF.request("localhost:3000/auth/regsiter", headers: headers)
+            AF.request("http://localhost:3000/auth/register", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil)
                 .validate()
                 .responseDecodable(of: UserResult.self) { response in
+                    print(response)
                     switch response.result {
                     case .success(let user):
                         observable(.success(user))
@@ -51,6 +48,7 @@ class RegisterDataSource: RegisterDataSourceProtocol {
             return Disposables.create()
         }
     }
+
 }
 
 enum MyError: Error {

@@ -15,7 +15,6 @@ class ProfileViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 30)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Welcome Juan Carlos"
         return label
     }()
     
@@ -23,7 +22,6 @@ class ProfileViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 25, weight: .heavy)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Tec de Monterrey: Pue"
         return label
     }()
     
@@ -31,13 +29,11 @@ class ProfileViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 25)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "A01731687"
         return label
     }()
     
     private lazy var emailLabel: UILabel = {
         let label = UILabel()
-        label.text = "juan.carlos@email.com"
         label.font = UIFont.systemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -59,15 +55,35 @@ class ProfileViewController: UIViewController {
         btn.backgroundColor = .gray
         btn.layer.cornerRadius = 10
         btn.addTarget(self, action: #selector(presentViewController), for: .touchUpInside)
-        btn.setTitle("Logout", for: .normal)
         return btn
     }()
     
     @objc private func presentViewController() {
-        navigationController?.pushViewController(RegisterRouter.launch(onRegisterSuccess: { [weak self] user in
-            self?.loginBtn.setTitle("Logout", for: .normal)
-            self?.userNameLabel.text = user.firstName
-        }), animated: true)
+        if loginBtn.title(for: .normal) == "Logout" {
+            // presenter?.logout()
+        } else {
+            navigationController?.pushViewController(RegisterRouter.launch(onRegisterSuccess: { [weak self] user in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+                    self?.navigationController?.popViewController(animated: true)
+                }
+                self?.isLogged = true
+                self?.checkIfLogin(user: user)
+            }), animated: true)
+        }
+    }
+    
+    private func checkIfLogin(user: UserResult?) {
+        if isLogged {
+            userNameLabel.text = "Welcome \(user!.firstName)"
+            loginBtn.setTitle("Logout", for: .normal)
+            emailLabel.text = user!.email
+            userIdLabel.text = user!.alias
+        } else {
+            userNameLabel.text = "Welcome"
+            emailLabel.text = "Please Login"
+            loginBtn.setTitle("Login", for: .normal)
+            userIdLabel.text = ""
+        }
     }
     
     private func setupConstraints() {
@@ -105,5 +121,6 @@ class ProfileViewController: UIViewController {
         view.addSubview(userSchoolLabel)
         view.addSubview(userIdLabel)
         setupConstraints()
+        checkIfLogin(user: nil)
     }
 }

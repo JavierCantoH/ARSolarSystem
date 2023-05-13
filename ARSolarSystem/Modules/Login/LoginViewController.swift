@@ -70,8 +70,7 @@ class LoginViewController: UIViewController {
     }()
     
     @objc private func registerAction() {
-        let viewController = RegisterViewController()
-        navigationController?.pushViewController(viewController, animated: true)
+        navigationController?.popViewController(animated: true)
     }
 
     override func viewDidLoad() {

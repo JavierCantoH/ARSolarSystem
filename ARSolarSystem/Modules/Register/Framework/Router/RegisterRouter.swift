@@ -17,6 +17,7 @@ class RegisterRouter: RegisterRouterProtocol {
         let presenter: RegisterPresenterProtocol = RegisterPresenter(registerUseCase: registerUseCase)
         let viewController = RegisterViewController()
         viewController.presenter = presenter
+        viewController.registerSuccess = onRegisterSuccess
         return viewController
     }
 }

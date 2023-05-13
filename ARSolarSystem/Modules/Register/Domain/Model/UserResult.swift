@@ -12,4 +12,11 @@ struct UserResult: Codable {
     let firstName: String
     let lastName: String
     let alias: String
+
+    enum CodingKeys: String, CodingKey {
+        case email = "Email"
+        case firstName = "FirstName"
+        case lastName = "LastName"
+        case alias = "Alias"
+    }
 }
