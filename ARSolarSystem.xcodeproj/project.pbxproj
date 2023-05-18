@@ -142,8 +142,9 @@
 		EC03BFE02A0592A1006AC128 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				ECD291AE29E5E979002DFAFA /* RegisterViewController.swift */,
 				ECD291AC29E5E970002DFAFA /* LoginViewController.swift */,
+				ECD291AE29E5E979002DFAFA /* RegisterViewController.swift */,
+				EC70606F29E9E12B00F729A7 /* ProfileViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -276,7 +277,6 @@
 			isa = PBXGroup;
 			children = (
 				EC764B502A047EC10094E0F2 /* Tasks */,
-				EC70606E29E9E11800F729A7 /* Profile */,
 				EC70606B29E9E03700F729A7 /* BottomMenu */,
 				EC70606A29E9D07E00F729A7 /* Main */,
 				EC70606929E9D06E00F729A7 /* Auth */,
@@ -317,14 +317,6 @@
 				EC70606C29E9E06C00F729A7 /* TabBarViewController.swift */,
 			);
 			path = BottomMenu;
-			sourceTree = "<group>";
-		};
-		EC70606E29E9E11800F729A7 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				EC70606F29E9E12B00F729A7 /* ProfileViewController.swift */,
-			);
-			path = Profile;
 			sourceTree = "<group>";
 		};
 		EC764B502A047EC10094E0F2 /* Tasks */ = {
