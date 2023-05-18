@@ -129,6 +129,10 @@ class RegisterViewController: UIViewController {
         view.addSubview(registerBtn)
         view.addSubview(loginBtn)
         constraintsSetup()
+        nameTextfield.delegate = self
+        emailTextfield.delegate = self
+        passwordTextfield.delegate = self
+
     }
     
     private func constraintsSetup() {
@@ -183,5 +187,12 @@ extension RegisterViewController: RegisterViewProtocol {
             let tintedImage = image.withTintColor(.white, renderingMode: .alwaysOriginal)
             view.makeToast(message, duration: 2.0, position: .center, title: title, image: tintedImage, style: toastStyleMissElements)
         }
+    }
+}
+
+extension RegisterViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() 
+        return true
     }
 }
