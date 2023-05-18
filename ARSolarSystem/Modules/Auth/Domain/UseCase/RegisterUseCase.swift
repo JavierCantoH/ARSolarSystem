@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 
-class RegisterUseCase: UseCase<UserCredentials, UserResult> {
+class RegisterUseCase: UseCase<UserRegisterCredentials, UserResult> {
     
     var userRepository: AuthRepositoryProtocol
     
@@ -16,7 +16,7 @@ class RegisterUseCase: UseCase<UserCredentials, UserResult> {
         self.userRepository = userRepository
     }
 
-    override func execute(params: UserCredentials) throws -> Single<UserResult> {
+    override func execute(params: UserRegisterCredentials) throws -> Single<UserResult> {
         return try userRepository.registerUser(user: params)
     }
 }

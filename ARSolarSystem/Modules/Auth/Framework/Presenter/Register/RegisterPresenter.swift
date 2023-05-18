@@ -11,10 +11,10 @@ import RxSwift
 class RegisterPresenter: RegisterPresenterProtocol {
     
     private weak var view: RegisterViewProtocol?
-    private var registerUseCase: UseCase<UserCredentials, UserResult>
+    private var registerUseCase: UseCase<UserRegisterCredentials, UserResult>
     private let disposeBag = DisposeBag()
     
-    init(registerUseCase: UseCase<UserCredentials, UserResult>) {
+    init(registerUseCase: UseCase<UserRegisterCredentials, UserResult>) {
         self.registerUseCase = registerUseCase
     }
     
@@ -22,7 +22,7 @@ class RegisterPresenter: RegisterPresenterProtocol {
         self.view = view
     }
     
-    func registerUser(user: UserCredentials) {
+    func registerUser(user: UserRegisterCredentials) {
         // Validar correo electrónico y contraseña
         guard !user.email.isEmpty else {
             view?.showError(message: "Please enter your email")
@@ -46,7 +46,7 @@ class RegisterPresenter: RegisterPresenterProtocol {
                 .observe(on: MainScheduler())
                 .subscribe(onSuccess: { [weak self] user in
                     self?.view?.hideLoader()
-                    self?.view?.loginSuccess(user: user)
+                    self?.view?.registerSuccess(user: user)
                 }, onFailure: { [weak self] error in
                     self?.view?.hideLoader()
                     self?.view?.showError(message: error.localizedDescription)

@@ -23,10 +23,16 @@
 		EC03C0082A05974E006AC128 /* RegisterRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03C0072A05974E006AC128 /* RegisterRouterProtocol.swift */; };
 		EC03C00A2A059756006AC128 /* RegisterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC03C0092A059756006AC128 /* RegisterRouter.swift */; };
 		EC03C00D2A0599EA006AC128 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = EC03C00C2A0599EA006AC128 /* Toast */; };
-		EC2573572A098BB40071A0F1 /* UserCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2573562A098BB40071A0F1 /* UserCredentials.swift */; };
+		EC2573572A098BB40071A0F1 /* UserRegisterCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2573562A098BB40071A0F1 /* UserRegisterCredentials.swift */; };
 		EC25735A2A098D790071A0F1 /* SwiftJWT in Frameworks */ = {isa = PBXBuildFile; productRef = EC2573592A098D790071A0F1 /* SwiftJWT */; };
 		EC25735D2A0991880071A0F1 /* MyClaims.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC25735C2A0991880071A0F1 /* MyClaims.swift */; };
 		EC4AA70D2A16B32B003237F1 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4AA70C2A16B32B003237F1 /* LoginUseCase.swift */; };
+		EC4AA70F2A16B526003237F1 /* UserLoginCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4AA70E2A16B526003237F1 /* UserLoginCredentials.swift */; };
+		EC4AA7152A16B68A003237F1 /* LoginViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4AA7142A16B68A003237F1 /* LoginViewProtocol.swift */; };
+		EC4AA7172A16B694003237F1 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4AA7162A16B694003237F1 /* LoginPresenter.swift */; };
+		EC4AA7192A16B69A003237F1 /* LoginPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4AA7182A16B69A003237F1 /* LoginPresenterProtocol.swift */; };
+		EC4AA71B2A16B93A003237F1 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4AA71A2A16B93A003237F1 /* LoginRouter.swift */; };
+		EC4AA71D2A16B944003237F1 /* LoginRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4AA71C2A16B944003237F1 /* LoginRouterProtocol.swift */; };
 		EC70606D29E9E06C00F729A7 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC70606C29E9E06C00F729A7 /* TabBarViewController.swift */; };
 		EC70607029E9E12B00F729A7 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC70606F29E9E12B00F729A7 /* ProfileViewController.swift */; };
 		EC764B522A047EDA0094E0F2 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC764B512A047EDA0094E0F2 /* TasksViewController.swift */; };
@@ -55,9 +61,15 @@
 		EC03C0052A0596A1006AC128 /* RegisterViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewProtocol.swift; sourceTree = "<group>"; };
 		EC03C0072A05974E006AC128 /* RegisterRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRouterProtocol.swift; sourceTree = "<group>"; };
 		EC03C0092A059756006AC128 /* RegisterRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRouter.swift; sourceTree = "<group>"; };
-		EC2573562A098BB40071A0F1 /* UserCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentials.swift; sourceTree = "<group>"; };
+		EC2573562A098BB40071A0F1 /* UserRegisterCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterCredentials.swift; sourceTree = "<group>"; };
 		EC25735C2A0991880071A0F1 /* MyClaims.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClaims.swift; sourceTree = "<group>"; };
 		EC4AA70C2A16B32B003237F1 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		EC4AA70E2A16B526003237F1 /* UserLoginCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginCredentials.swift; sourceTree = "<group>"; };
+		EC4AA7142A16B68A003237F1 /* LoginViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewProtocol.swift; sourceTree = "<group>"; };
+		EC4AA7162A16B694003237F1 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		EC4AA7182A16B69A003237F1 /* LoginPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenterProtocol.swift; sourceTree = "<group>"; };
+		EC4AA71A2A16B93A003237F1 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
+		EC4AA71C2A16B944003237F1 /* LoginRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouterProtocol.swift; sourceTree = "<group>"; };
 		EC70606C29E9E06C00F729A7 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		EC70606F29E9E12B00F729A7 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EC764B512A047EDA0094E0F2 /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
@@ -121,8 +133,8 @@
 		EC03BFDF2A059296006AC128 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				EC03C0072A05974E006AC128 /* RegisterRouterProtocol.swift */,
-				EC03C0092A059756006AC128 /* RegisterRouter.swift */,
+				EC4AA7132A16B66D003237F1 /* Login */,
+				EC4AA7122A16B667003237F1 /* Register */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -191,7 +203,8 @@
 			isa = PBXGroup;
 			children = (
 				EC03BFF42A059408006AC128 /* UserResult.swift */,
-				EC2573562A098BB40071A0F1 /* UserCredentials.swift */,
+				EC2573562A098BB40071A0F1 /* UserRegisterCredentials.swift */,
+				EC4AA70E2A16B526003237F1 /* UserLoginCredentials.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -207,9 +220,8 @@
 		EC03BFF12A05939C006AC128 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				EC03C0012A059689006AC128 /* RegisterPresenterProtocol.swift */,
-				EC03C0032A059695006AC128 /* RegisterPresenter.swift */,
-				EC03C0052A0596A1006AC128 /* RegisterViewProtocol.swift */,
+				EC4AA7112A16B65B003237F1 /* Login */,
+				EC4AA7102A16B655003237F1 /* Register */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -220,6 +232,44 @@
 				EC25735C2A0991880071A0F1 /* MyClaims.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		EC4AA7102A16B655003237F1 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				EC03C0012A059689006AC128 /* RegisterPresenterProtocol.swift */,
+				EC03C0032A059695006AC128 /* RegisterPresenter.swift */,
+				EC03C0052A0596A1006AC128 /* RegisterViewProtocol.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		EC4AA7112A16B65B003237F1 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				EC4AA7182A16B69A003237F1 /* LoginPresenterProtocol.swift */,
+				EC4AA7162A16B694003237F1 /* LoginPresenter.swift */,
+				EC4AA7142A16B68A003237F1 /* LoginViewProtocol.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		EC4AA7122A16B667003237F1 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				EC03C0072A05974E006AC128 /* RegisterRouterProtocol.swift */,
+				EC03C0092A059756006AC128 /* RegisterRouter.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		EC4AA7132A16B66D003237F1 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				EC4AA71A2A16B93A003237F1 /* LoginRouter.swift */,
+				EC4AA71C2A16B944003237F1 /* LoginRouterProtocol.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		EC70606629E9D05500F729A7 /* Modules */ = {
@@ -414,19 +464,25 @@
 				EC03C0002A05964C006AC128 /* BaseView.swift in Sources */,
 				EC03BFFD2A059546006AC128 /* AuthDataSource.swift in Sources */,
 				EC03BFFB2A0594F9006AC128 /* RegisterUseCase.swift in Sources */,
+				EC4AA71B2A16B93A003237F1 /* LoginRouter.swift in Sources */,
 				EC03BFF32A0593C6006AC128 /* AuthDataSourceProtocol.swift in Sources */,
 				EC4AA70D2A16B32B003237F1 /* LoginUseCase.swift in Sources */,
 				EC03C0082A05974E006AC128 /* RegisterRouterProtocol.swift in Sources */,
 				EC764B522A047EDA0094E0F2 /* TasksViewController.swift in Sources */,
 				ECD291AF29E5E979002DFAFA /* RegisterViewController.swift in Sources */,
+				EC4AA7152A16B68A003237F1 /* LoginViewProtocol.swift in Sources */,
 				EC03BFF72A05945C006AC128 /* AuthRepository.swift in Sources */,
 				ECD291AB29E5E83F002DFAFA /* MainViewController.swift in Sources */,
-				EC2573572A098BB40071A0F1 /* UserCredentials.swift in Sources */,
+				EC4AA7172A16B694003237F1 /* LoginPresenter.swift in Sources */,
+				EC4AA7192A16B69A003237F1 /* LoginPresenterProtocol.swift in Sources */,
+				EC2573572A098BB40071A0F1 /* UserRegisterCredentials.swift in Sources */,
+				EC4AA71D2A16B944003237F1 /* LoginRouterProtocol.swift in Sources */,
 				EC03BFE42A0592DA006AC128 /* UseCase.swift in Sources */,
 				ECD2914229CF8DBE002DFAFA /* SolarSystemViewController.swift in Sources */,
 				EC03C00A2A059756006AC128 /* RegisterRouter.swift in Sources */,
 				EC03BFF52A059408006AC128 /* UserResult.swift in Sources */,
 				EC03C0062A0596A1006AC128 /* RegisterViewProtocol.swift in Sources */,
+				EC4AA70F2A16B526003237F1 /* UserLoginCredentials.swift in Sources */,
 				EC70607029E9E12B00F729A7 /* ProfileViewController.swift in Sources */,
 				EC03C0042A059695006AC128 /* RegisterPresenter.swift in Sources */,
 				EC70606D29E9E06C00F729A7 /* TabBarViewController.swift in Sources */,

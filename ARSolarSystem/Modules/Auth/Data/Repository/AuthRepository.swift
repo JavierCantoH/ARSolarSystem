@@ -16,7 +16,11 @@ class AuthRepository: AuthRepositoryProtocol {
         self.userDataSource = userDataSource
     }
     
-    func registerUser(user: UserCredentials) throws -> Single<UserResult> {
+    func registerUser(user: UserRegisterCredentials) throws -> Single<UserResult> {
         return try userDataSource.registerUser(user: user)
+    }
+    
+    func loginUser(user: UserLoginCredentials) throws -> Single<UserResult> {
+        return try userDataSource.loginUser(user: user)
     }
 }

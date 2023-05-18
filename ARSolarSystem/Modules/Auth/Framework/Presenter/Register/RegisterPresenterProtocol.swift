@@ -9,5 +9,5 @@ import Foundation
 
 protocol RegisterPresenterProtocol: AnyObject {
     func attachView(view: RegisterViewProtocol)
-    func registerUser(user: UserCredentials)
+    func registerUser(user: UserRegisterCredentials)
 }

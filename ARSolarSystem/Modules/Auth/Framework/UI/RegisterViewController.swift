@@ -103,15 +103,20 @@ class RegisterViewController: UIViewController {
     }()
     
     @objc private func loginAction() {
-        navigationController?.pushViewController(LoginViewController(), animated: true)
+        navigationController?.pushViewController(LoginRouter.launch(onLoginSuccess: { [weak self] user in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }
+            self?.registerSucceed?(user)
+        }), animated: true)
     }
     
     @objc private func registerAction() {
-        presenter?.registerUser(user: UserCredentials(email: emailTextfield.text ?? "", firstName: nameTextfield.text ?? "", lastName: nameTextfield.text ?? "", alias: nameTextfield.text ?? "", password: passwordTextfield.text ?? ""))
+        presenter?.registerUser(user: UserRegisterCredentials(email: emailTextfield.text ?? "", firstName: nameTextfield.text ?? "", lastName: nameTextfield.text ?? "", alias: nameTextfield.text ?? "", password: passwordTextfield.text ?? ""))
     }
     
     var presenter: RegisterPresenterProtocol?
-    var registerSuccess: ((UserResult) -> Void)?
+    var registerSucceed: ((UserResult) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -166,11 +171,11 @@ class RegisterViewController: UIViewController {
 
 extension RegisterViewController: RegisterViewProtocol {
     
-    func loginSuccess(user: UserResult) {
+    func registerSuccess(user: UserResult) {
         if let image = UIImage(systemName: "checkmark.circle") {
             let tintedImage = image.withTintColor(.white, renderingMode: .alwaysOriginal)
             view.makeToast("Welcome!", duration: 2.0, position: .top, title: title, image: tintedImage, style: toastStyleComplete)
-            registerSuccess?(user)
+            registerSucceed?(user)
         }
     }
     

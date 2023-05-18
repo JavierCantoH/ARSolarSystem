@@ -9,5 +9,6 @@ import Foundation
 import RxSwift
 
 protocol AuthRepositoryProtocol: AnyObject {
-    func registerUser(user: UserCredentials) throws -> Single<UserResult>
+    func registerUser(user: UserRegisterCredentials) throws -> Single<UserResult>
+    func loginUser(user: UserLoginCredentials) throws -> Single<UserResult>
 }

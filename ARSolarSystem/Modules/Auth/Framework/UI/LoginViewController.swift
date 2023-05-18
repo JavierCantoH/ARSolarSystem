@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast
 
 class LoginViewController: UIViewController {
 
@@ -53,9 +54,10 @@ class LoginViewController: UIViewController {
     private lazy var buttonEnter: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle("Play", for: .normal)
+        btn.setTitle("Login", for: .normal)
         btn.backgroundColor = .blue
         btn.layer.cornerRadius = 10
+        btn.addTarget(self, action: #selector(loginAction), for: .touchUpInside)
         return btn
     }()
     
@@ -69,13 +71,37 @@ class LoginViewController: UIViewController {
         return btn
     }()
     
+    private lazy var toastStyleMissElements: ToastStyle = {
+        var style = ToastStyle()
+        style.backgroundColor = .red
+        style.titleColor = .white
+        style.imageSize = CGSize(width: 50, height: 50)
+        return style
+    }()
+    
+    private lazy var toastStyleComplete: ToastStyle = {
+        var style = ToastStyle()
+        style.backgroundColor = .green
+        style.titleColor = .white
+        style.imageSize = CGSize(width: 50, height: 50)
+        return style
+    }()
+    
+    @objc private func loginAction() {
+        presenter?.loginUser(user: UserLoginCredentials(email: userTextField.text ?? "", password: passwordTextField.text ?? ""))
+    }
+    
     @objc private func registerAction() {
         navigationController?.popViewController(animated: true)
     }
+    
+    var presenter: LoginPresenterProtocol?
+    var loginSucceed: ((UserResult) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        presenter?.attachView(view: self)
     }
     
     private func setupView() {
@@ -87,6 +113,8 @@ class LoginViewController: UIViewController {
         view.addSubview(buttonEnter)
         view.addSubview(resgisterBtn)
         constraintsSetUp()
+        userTextField.delegate = self
+        passwordTextField.delegate = self
     }
     
     private func constraintsSetUp(){
@@ -111,5 +139,38 @@ class LoginViewController: UIViewController {
             resgisterBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             resgisterBtn.widthAnchor.constraint(equalToConstant: 300),
         ])
+    }
+}
+
+extension LoginViewController: LoginViewProtocol {
+    
+    func loginSuccess(user: UserResult) {
+        if let image = UIImage(systemName: "checkmark.circle") {
+            let tintedImage = image.withTintColor(.white, renderingMode: .alwaysOriginal)
+            view.makeToast("Welcome!", duration: 2.0, position: .top, title: title, image: tintedImage, style: toastStyleComplete)
+            loginSucceed?(user)
+        }
+    }
+    
+    func showLoader() {
+        view.makeToastActivity(.bottom)
+    }
+    
+    func hideLoader() {
+        view.hideToastActivity()
+    }
+    
+    func showError(message: String) {
+        if let image = UIImage(systemName: "exclamationmark.square.fill") {
+            let tintedImage = image.withTintColor(.white, renderingMode: .alwaysOriginal)
+            view.makeToast(message, duration: 2.0, position: .center, title: title, image: tintedImage, style: toastStyleMissElements)
+        }
+    }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

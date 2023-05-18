@@ -13,11 +13,11 @@ class RegisterRouter: RegisterRouterProtocol {
     static func launch(onRegisterSuccess: @escaping(UserResult) -> Void) -> UIViewController {
         let dataSource: AuthDataSourceProtocol = AuthDataSource()
         let repository: AuthRepositoryProtocol = AuthRepository(userDataSource: dataSource)
-        let registerUseCase: UseCase<UserCredentials, UserResult> = RegisterUseCase(userRepository: repository)
+        let registerUseCase: UseCase<UserRegisterCredentials, UserResult> = RegisterUseCase(userRepository: repository)
         let presenter: RegisterPresenterProtocol = RegisterPresenter(registerUseCase: registerUseCase)
         let viewController = RegisterViewController()
         viewController.presenter = presenter
-        viewController.registerSuccess = onRegisterSuccess
+        viewController.registerSucceed = onRegisterSuccess
         return viewController
     }
 }

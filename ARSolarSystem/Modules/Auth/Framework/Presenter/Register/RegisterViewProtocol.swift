@@ -8,5 +8,5 @@
 import Foundation
 
 protocol RegisterViewProtocol: BaseView {
-    func loginSuccess(user: UserResult)
+    func registerSuccess(user: UserResult)
 }
