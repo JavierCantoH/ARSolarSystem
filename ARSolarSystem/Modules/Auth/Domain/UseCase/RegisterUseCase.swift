@@ -10,9 +10,9 @@ import RxSwift
 
 class RegisterUseCase: UseCase<UserCredentials, UserResult> {
     
-    var userRepository: RegisterRepositoryProtocol
+    var userRepository: AuthRepositoryProtocol
     
-    init(userRepository: RegisterRepositoryProtocol) {
+    init(userRepository: AuthRepositoryProtocol) {
         self.userRepository = userRepository
     }
 

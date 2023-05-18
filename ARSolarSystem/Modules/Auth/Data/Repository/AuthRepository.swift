@@ -1,5 +1,5 @@
 //
-//  RegisterRepository.swift
+//  AuthRepository.swift
 //  ARSolarSystem
 //
 //  Created by Luis Javier Canto Hurtado on 05/05/23.
@@ -8,11 +8,11 @@
 import Foundation
 import RxSwift
 
-class RegisterRepository: RegisterRepositoryProtocol {
+class AuthRepository: AuthRepositoryProtocol {
     
-    private var userDataSource: RegisterDataSourceProtocol
+    private var userDataSource: AuthDataSourceProtocol
     
-    init(userDataSource: RegisterDataSourceProtocol) {
+    init(userDataSource: AuthDataSourceProtocol) {
         self.userDataSource = userDataSource
     }
     

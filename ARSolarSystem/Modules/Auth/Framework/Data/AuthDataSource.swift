@@ -1,5 +1,5 @@
 //
-//  RegisterDataSource.swift
+//  AuthDataSource.swift
 //  ARSolarSystem
 //
 //  Created by Luis Javier Canto Hurtado on 05/05/23.
@@ -10,7 +10,7 @@ import RxSwift
 import Alamofire
 import SwiftJWT
 
-class RegisterDataSource: RegisterDataSourceProtocol {
+class AuthDataSource: AuthDataSourceProtocol {
     
     func registerUser(user: UserCredentials) throws -> Single<UserResult> {
         return requestRegister(user: user)
