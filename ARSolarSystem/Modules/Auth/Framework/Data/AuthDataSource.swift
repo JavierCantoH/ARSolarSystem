@@ -26,13 +26,15 @@ class AuthDataSource: AuthDataSourceProtocol {
     
     func loginUser(user: UserLoginCredentials) throws -> Single<UserResult> {
         return requestLogin(user: user)
-                .do(onSuccess: { user in
-                    if user.email.isEmpty {
-                        throw MyError.error("User without email")
-                    }
-                })
+            .do(onSuccess: { response in
+                print(response.message)
+                print(response.token)
+                print(response.user)
+        }, afterSuccess: nil, onError: { error in
+            throw MyError.error(error.localizedDescription)
+        }, afterError: nil, onSubscribe: nil, onSubscribed: nil, onDispose: nil)
                 .map { response in
-                    return response
+                    return response.user
                 }
     }
     
@@ -61,7 +63,7 @@ class AuthDataSource: AuthDataSourceProtocol {
         }
     }
     
-    private func requestLogin(user: UserLoginCredentials) -> Single<UserResult> {
+    private func requestLogin(user: UserLoginCredentials) -> Single<LoginResponse> {
         return Single.create { observable in
             let parameters = [
                 "Email": user.email,
@@ -69,7 +71,7 @@ class AuthDataSource: AuthDataSourceProtocol {
             ]
             AF.request("http://localhost:3000/auth/login", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil)
                 .validate()
-                .responseDecodable(of: UserResult.self) { response in
+                .responseDecodable(of: LoginResponse.self) { response in
                     print(response)
                     switch response.result {
                     case .success(let user):
