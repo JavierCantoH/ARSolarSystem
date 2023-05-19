@@ -62,7 +62,7 @@ class ProfileViewController: UIViewController {
         if loginBtn.title(for: .normal) == "Logout" {
             // presenter?.logout()
         } else {
-            navigationController?.pushViewController(RegisterRouter.launch(onRegisterSuccess: { [weak self] user in
+            navigationController?.pushViewController(LoginRouter.launch(onLoginSuccess: { [weak self] user in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
                     self?.navigationController?.popViewController(animated: true)
                 }

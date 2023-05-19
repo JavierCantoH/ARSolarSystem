@@ -26,16 +26,31 @@ class AuthDataSource: AuthDataSourceProtocol {
     
     func loginUser(user: UserLoginCredentials) throws -> Single<UserResult> {
         return requestLogin(user: user)
-            .do(onSuccess: { response in
+            .do(onSuccess: { [weak self] response in
                 print(response.message)
                 print(response.token)
                 print(response.user)
+                self?.storeUserData(response.user, token: response.token)
         }, afterSuccess: nil, onError: { error in
             throw MyError.error(error.localizedDescription)
         }, afterError: nil, onSubscribe: nil, onSubscribed: nil, onDispose: nil)
                 .map { response in
                     return response.user
                 }
+    }
+    
+    func getUserData() -> (UserResult?, String?) {
+        let defaults = UserDefaults.standard
+        guard let email = defaults.string(forKey: "userEmail"),
+              let firstName = defaults.string(forKey: "userFirstName"),
+              let lastName = defaults.string(forKey: "userLastName"),
+              let alias = defaults.string(forKey: "userAlias"),
+              let token = defaults.string(forKey: "userToken") else {
+            return (nil, nil)
+        }
+        let id = defaults.string(forKey: "userId")
+        let user = UserResult(email: email, firstName: firstName, lastName: lastName, alias: alias, id: id)
+        return (user, token)
     }
     
     private func requestRegister(user: UserRegisterCredentials) -> Single<UserResult> {
@@ -83,6 +98,16 @@ class AuthDataSource: AuthDataSourceProtocol {
                 }
             return Disposables.create()
         }
+    }
+    
+    private func storeUserData(_ user: UserResult, token: String) {
+        let defaults = UserDefaults.standard
+        defaults.set(user.email, forKey: "userEmail")
+        defaults.set(user.firstName, forKey: "userFirstName")
+        defaults.set(user.lastName, forKey: "userLastName")
+        defaults.set(user.alias, forKey: "userAlias")
+        defaults.set(user.id, forKey: "userId")
+        defaults.set(token, forKey: "userToken")
     }
 }
 

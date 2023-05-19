@@ -103,12 +103,7 @@ class RegisterViewController: UIViewController {
     }()
     
     @objc private func loginAction() {
-        navigationController?.pushViewController(LoginRouter.launch(onLoginSuccess: { [weak self] user in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
-                self?.navigationController?.popViewController(animated: true)
-            }
-            self?.registerSucceed?(user)
-        }), animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     @objc private func registerAction() {
@@ -174,7 +169,7 @@ extension RegisterViewController: RegisterViewProtocol {
     func registerSuccess(user: UserResult) {
         if let image = UIImage(systemName: "checkmark.circle") {
             let tintedImage = image.withTintColor(.white, renderingMode: .alwaysOriginal)
-            view.makeToast("Welcome!", duration: 2.0, position: .top, title: title, image: tintedImage, style: toastStyleComplete)
+            view.makeToast("Register succeed! Please Login", duration: 2.0, position: .top, title: title, image: tintedImage, style: toastStyleComplete)
             registerSucceed?(user)
         }
     }
