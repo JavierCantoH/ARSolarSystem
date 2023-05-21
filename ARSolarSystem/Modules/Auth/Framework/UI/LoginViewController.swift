@@ -152,8 +152,10 @@ extension LoginViewController: LoginViewProtocol {
     func loginSuccess(user: UserResult) {
         if let image = UIImage(systemName: "checkmark.circle") {
             let tintedImage = image.withTintColor(.white, renderingMode: .alwaysOriginal)
-            view.makeToast("Welcome!", duration: 2.0, position: .top, title: title, image: tintedImage, style: toastStyleComplete)
-            loginSucceed?(user)
+            view.makeToast("\(user.firstName)", duration: 2.0, position: .top, title: "Welcome", image: tintedImage, style: toastStyleComplete)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+                self?.loginSucceed?(user)
+            }
         }
     }
     
@@ -168,7 +170,7 @@ extension LoginViewController: LoginViewProtocol {
     func showError(message: String) {
         if let image = UIImage(systemName: "exclamationmark.square.fill") {
             let tintedImage = image.withTintColor(.white, renderingMode: .alwaysOriginal)
-            view.makeToast(message, duration: 2.0, position: .center, title: title, image: tintedImage, style: toastStyleMissElements)
+            view.makeToast(message, duration: 2.0, position: .center, title: "Ups!", image: tintedImage, style: toastStyleMissElements)
         }
     }
 }

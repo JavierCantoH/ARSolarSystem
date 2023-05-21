@@ -34,3 +34,12 @@ struct LoginResponse: Codable {
         case user = "User"
     }
 }
+
+struct LogoutResponse: Codable {
+    let message: String
+    // MARK: todo error object
+    
+    enum CodingKeys: String, CodingKey {
+        case message = "msg"
+    }
+}

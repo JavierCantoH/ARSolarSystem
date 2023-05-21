@@ -11,7 +11,7 @@ import UIKit
 class RegisterRouter: RegisterRouterProtocol {
     
     static func launch(onRegisterSuccess: @escaping(UserResult) -> Void) -> UIViewController {
-        let dataSource: AuthDataSourceProtocol = AuthDataSource()
+        let dataSource = AuthDataSource.shared
         let repository: AuthRepositoryProtocol = AuthRepository(userDataSource: dataSource)
         let registerUseCase: UseCase<UserRegisterCredentials, UserResult> = RegisterUseCase(userRepository: repository)
         let presenter: RegisterPresenterProtocol = RegisterPresenter(registerUseCase: registerUseCase)

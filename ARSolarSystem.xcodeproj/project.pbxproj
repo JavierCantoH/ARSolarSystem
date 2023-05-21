@@ -45,6 +45,13 @@
 		ECD291AB29E5E83F002DFAFA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD291AA29E5E83F002DFAFA /* MainViewController.swift */; };
 		ECD291AD29E5E970002DFAFA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD291AC29E5E970002DFAFA /* LoginViewController.swift */; };
 		ECD291AF29E5E979002DFAFA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD291AE29E5E979002DFAFA /* RegisterViewController.swift */; };
+		ECF8A4BC2A1AA90E00819451 /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8A4BB2A1AA90E00819451 /* LogoutUseCase.swift */; };
+		ECF8A4BF2A1AA97D00819451 /* ProfilePresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8A4BE2A1AA97D00819451 /* ProfilePresenterProtocol.swift */; };
+		ECF8A4C12A1AA98300819451 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8A4C02A1AA98300819451 /* ProfilePresenter.swift */; };
+		ECF8A4C32A1AA98C00819451 /* ProfileViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8A4C22A1AA98C00819451 /* ProfileViewProtocol.swift */; };
+		ECF8A4C62A1AA9AA00819451 /* ProfileRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8A4C52A1AA9AA00819451 /* ProfileRouterProtocol.swift */; };
+		ECF8A4C82A1AA9AF00819451 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8A4C72A1AA9AF00819451 /* ProfileRouter.swift */; };
+		ECF8A4CA2A1AAD1700819451 /* GetUserDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8A4C92A1AAD1700819451 /* GetUserDataUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +90,13 @@
 		ECD291AA29E5E83F002DFAFA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		ECD291AC29E5E970002DFAFA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ECD291AE29E5E979002DFAFA /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		ECF8A4BB2A1AA90E00819451 /* LogoutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutUseCase.swift; sourceTree = "<group>"; };
+		ECF8A4BE2A1AA97D00819451 /* ProfilePresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenterProtocol.swift; sourceTree = "<group>"; };
+		ECF8A4C02A1AA98300819451 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
+		ECF8A4C22A1AA98C00819451 /* ProfileViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewProtocol.swift; sourceTree = "<group>"; };
+		ECF8A4C52A1AA9AA00819451 /* ProfileRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouterProtocol.swift; sourceTree = "<group>"; };
+		ECF8A4C72A1AA9AF00819451 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
+		ECF8A4C92A1AAD1700819451 /* GetUserDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserDataUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +147,7 @@
 		EC03BFDF2A059296006AC128 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				ECF8A4C42A1AA99500819451 /* Profile */,
 				EC4AA7132A16B66D003237F1 /* Login */,
 				EC4AA7122A16B667003237F1 /* Register */,
 			);
@@ -196,6 +211,8 @@
 			children = (
 				EC4AA70C2A16B32B003237F1 /* LoginUseCase.swift */,
 				EC03BFFA2A0594F9006AC128 /* RegisterUseCase.swift */,
+				ECF8A4BB2A1AA90E00819451 /* LogoutUseCase.swift */,
+				ECF8A4C92A1AAD1700819451 /* GetUserDataUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -221,6 +238,7 @@
 		EC03BFF12A05939C006AC128 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				ECF8A4BD2A1AA96A00819451 /* Profile */,
 				EC4AA7112A16B65B003237F1 /* Login */,
 				EC4AA7102A16B655003237F1 /* Register */,
 			);
@@ -365,6 +383,25 @@
 			path = ARSolarSystem;
 			sourceTree = "<group>";
 		};
+		ECF8A4BD2A1AA96A00819451 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				ECF8A4BE2A1AA97D00819451 /* ProfilePresenterProtocol.swift */,
+				ECF8A4C02A1AA98300819451 /* ProfilePresenter.swift */,
+				ECF8A4C22A1AA98C00819451 /* ProfileViewProtocol.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		ECF8A4C42A1AA99500819451 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				ECF8A4C52A1AA9AA00819451 /* ProfileRouterProtocol.swift */,
+				ECF8A4C72A1AA9AF00819451 /* ProfileRouter.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -452,19 +489,25 @@
 				EC03BFF92A059470006AC128 /* AuthRepositoryProtocol.swift in Sources */,
 				EC03C0022A059689006AC128 /* RegisterPresenterProtocol.swift in Sources */,
 				ECD291AD29E5E970002DFAFA /* LoginViewController.swift in Sources */,
+				ECF8A4C32A1AA98C00819451 /* ProfileViewProtocol.swift in Sources */,
 				EC764B552A04B4AF0094E0F2 /* TodoItem.swift in Sources */,
 				EC03C0002A05964C006AC128 /* BaseView.swift in Sources */,
 				EC03BFFD2A059546006AC128 /* AuthDataSource.swift in Sources */,
 				EC03BFFB2A0594F9006AC128 /* RegisterUseCase.swift in Sources */,
 				EC4AA71B2A16B93A003237F1 /* LoginRouter.swift in Sources */,
 				EC03BFF32A0593C6006AC128 /* AuthDataSourceProtocol.swift in Sources */,
+				ECF8A4C12A1AA98300819451 /* ProfilePresenter.swift in Sources */,
 				EC4AA70D2A16B32B003237F1 /* LoginUseCase.swift in Sources */,
 				EC03C0082A05974E006AC128 /* RegisterRouterProtocol.swift in Sources */,
+				ECF8A4C62A1AA9AA00819451 /* ProfileRouterProtocol.swift in Sources */,
 				EC764B522A047EDA0094E0F2 /* TasksViewController.swift in Sources */,
 				ECD291AF29E5E979002DFAFA /* RegisterViewController.swift in Sources */,
 				EC4AA7152A16B68A003237F1 /* LoginViewProtocol.swift in Sources */,
 				EC03BFF72A05945C006AC128 /* AuthRepository.swift in Sources */,
+				ECF8A4CA2A1AAD1700819451 /* GetUserDataUseCase.swift in Sources */,
 				ECD291AB29E5E83F002DFAFA /* MainViewController.swift in Sources */,
+				ECF8A4BC2A1AA90E00819451 /* LogoutUseCase.swift in Sources */,
+				ECF8A4C82A1AA9AF00819451 /* ProfileRouter.swift in Sources */,
 				EC4AA7172A16B694003237F1 /* LoginPresenter.swift in Sources */,
 				EC4AA7192A16B69A003237F1 /* LoginPresenterProtocol.swift in Sources */,
 				EC2573572A098BB40071A0F1 /* UserRegisterCredentials.swift in Sources */,
@@ -478,6 +521,7 @@
 				EC70607029E9E12B00F729A7 /* ProfileViewController.swift in Sources */,
 				EC03C0042A059695006AC128 /* RegisterPresenter.swift in Sources */,
 				EC70606D29E9E06C00F729A7 /* TabBarViewController.swift in Sources */,
+				ECF8A4BF2A1AA97D00819451 /* ProfilePresenterProtocol.swift in Sources */,
 				ECD2913E29CF8DBE002DFAFA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

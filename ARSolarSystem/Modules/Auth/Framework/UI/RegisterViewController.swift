@@ -169,7 +169,7 @@ extension RegisterViewController: RegisterViewProtocol {
     func registerSuccess(user: UserResult) {
         if let image = UIImage(systemName: "checkmark.circle") {
             let tintedImage = image.withTintColor(.white, renderingMode: .alwaysOriginal)
-            view.makeToast("Register succeed! Please Login", duration: 2.0, position: .top, title: title, image: tintedImage, style: toastStyleComplete)
+            view.makeToast("Please Login", duration: 2.0, position: .top, title: "Register succeed!", image: tintedImage, style: toastStyleComplete)
             registerSucceed?(user)
         }
     }
@@ -185,7 +185,7 @@ extension RegisterViewController: RegisterViewProtocol {
     func showError(message: String) {
         if let image = UIImage(systemName: "exclamationmark.square.fill") {
             let tintedImage = image.withTintColor(.white, renderingMode: .alwaysOriginal)
-            view.makeToast(message, duration: 2.0, position: .center, title: title, image: tintedImage, style: toastStyleMissElements)
+            view.makeToast(message, duration: 2.0, position: .center, title: "Ups!", image: tintedImage, style: toastStyleMissElements)
         }
     }
 }

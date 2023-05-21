@@ -11,4 +11,6 @@ import RxSwift
 protocol AuthDataSourceProtocol: AnyObject {
     func registerUser(user: UserRegisterCredentials) throws -> Single<UserResult>
     func loginUser(user: UserLoginCredentials) throws -> Single<UserResult>
+    func logoutUser(token: String) throws -> Single<LogoutResponse>
+    func getUserData() -> Single<(UserResult?, String?)>
 }

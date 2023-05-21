@@ -11,7 +11,7 @@ import UIKit
 class LoginRouter: LoginRouterProtocol {
     
     static func launch(onLoginSuccess: @escaping(UserResult) -> Void) -> UIViewController {
-        let dataSource: AuthDataSourceProtocol = AuthDataSource()
+        let dataSource = AuthDataSource.shared
         let repository: AuthRepositoryProtocol = AuthRepository(userDataSource: dataSource)
         let loginUseCase: UseCase<UserLoginCredentials, UserResult> = LoginUseCase(userRepository: repository)
         let presenter: LoginPresenterProtocol = LoginPresenter(loginUseCase: loginUseCase)

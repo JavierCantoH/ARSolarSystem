@@ -23,4 +23,12 @@ class AuthRepository: AuthRepositoryProtocol {
     func loginUser(user: UserLoginCredentials) throws -> Single<UserResult> {
         return try userDataSource.loginUser(user: user)
     }
+    
+    func logoutUser(token: String) throws -> Single<LogoutResponse> {
+        return try userDataSource.logoutUser(token: token)
+    }
+    
+    func getUserData() -> Single<(UserResult?, String?)> {
+        return userDataSource.getUserData()
+    }
 }

@@ -15,7 +15,7 @@ class TabBarViewController: UITabBarController {
         viewControllers = [
             createNavController(for: SolarSystemViewController(), title: "Discover", imageName: "globe.americas"),
             createNavController(for: TasksViewController(), title: "Tasks", imageName: "checklist"),
-            createNavController(for: ProfileViewController(), title: "Profile", imageName: "person.circle"),
+            createNavController(for: ProfileRouter.launch(), title: "Profile", imageName: "person.circle"),
         ]
     }
     

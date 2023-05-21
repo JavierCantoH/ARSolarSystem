@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast
 
 class ProfileViewController: UIViewController {
     
@@ -57,17 +58,27 @@ class ProfileViewController: UIViewController {
         return btn
     }()
     
-    let authDataSource = AuthDataSource()
+    private lazy var toastStyleMissElements: ToastStyle = {
+        var style = ToastStyle()
+        style.backgroundColor = .red
+        style.titleColor = .white
+        style.imageSize = CGSize(width: 50, height: 50)
+        return style
+    }()
+    
+    private lazy var toastStyleComplete: ToastStyle = {
+        var style = ToastStyle()
+        style.backgroundColor = .green
+        style.titleColor = .white
+        style.imageSize = CGSize(width: 50, height: 50)
+        return style
+    }()
+    
+    var presenter: ProfilePresenterProtocol?
+    private var userToken = ""
     
     @objc private func logoutUser() {
-        
-    }
-    
-    private func populateView() {
-        let result = authDataSource.getUserData()
-        userNameLabel.text = "Welcome \(result.0?.firstName ?? "user first name")"
-        emailLabel.text = result.0?.email
-        userIdLabel.text = result.0?.alias
+        presenter?.logoutUser(token: userToken)
     }
     
     private func setupConstraints() {
@@ -105,6 +116,44 @@ class ProfileViewController: UIViewController {
         view.addSubview(userSchoolLabel)
         view.addSubview(userIdLabel)
         setupConstraints()
-        populateView()
+        presenter?.attachView(view: self)
+        presenter?.getUserData()
+    }
+}
+
+extension ProfileViewController: ProfileViewProtocol {
+    
+    func getUserData(result: UserResult?, token: String?) {
+        userNameLabel.text = "Welcome \(result?.firstName ?? "")"
+        emailLabel.text = result?.email
+        userIdLabel.text = result?.alias
+        userToken = token ?? ""
+    }
+    
+    func logoutSuccess(message: String) {
+        if message == "You have been Logged Out" {
+            if let image = UIImage(systemName: "checkmark.circle") {
+                let tintedImage = image.withTintColor(.white, renderingMode: .alwaysOriginal)
+                view.makeToast(":(", duration: 2.0, position: .top, title: "See you soon", image: tintedImage, style: toastStyleComplete)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    (UIApplication.shared.delegate as? AppDelegate)?.logout()
+                }
+            }
+        }
+    }
+    
+    func showLoader() {
+        view.makeToastActivity(.bottom)
+    }
+    
+    func hideLoader() {
+        view.hideToastActivity()
+    }
+    
+    func showError(message: String) {
+        if let image = UIImage(systemName: "exclamationmark.square.fill") {
+            let tintedImage = image.withTintColor(.white, renderingMode: .alwaysOriginal)
+            view.makeToast(message, duration: 2.0, position: .center, title: "Ups!", image: tintedImage, style: toastStyleMissElements)
+        }
     }
 }
