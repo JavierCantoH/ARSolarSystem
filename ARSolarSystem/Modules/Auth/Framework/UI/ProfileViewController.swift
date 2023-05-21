@@ -9,8 +9,6 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    var isLogged: Bool = false
-    
     private lazy var userNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 30)
@@ -49,41 +47,27 @@ class ProfileViewController: UIViewController {
         return image
     }()
     
-    private lazy var loginBtn: UIButton = {
+    private lazy var logoutBtn: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.backgroundColor = .gray
         btn.layer.cornerRadius = 10
-        btn.addTarget(self, action: #selector(presentViewController), for: .touchUpInside)
+        btn.setTitle("Logout", for: .normal)
+        btn.addTarget(self, action: #selector(logoutUser), for: .touchUpInside)
         return btn
     }()
     
-    @objc private func presentViewController() {
-        if loginBtn.title(for: .normal) == "Logout" {
-            // presenter?.logout()
-        } else {
-            navigationController?.pushViewController(LoginRouter.launch(onLoginSuccess: { [weak self] user in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
-                    self?.navigationController?.popViewController(animated: true)
-                }
-                self?.isLogged = true
-                self?.checkIfLogin(user: user)
-            }), animated: true)
-        }
+    let authDataSource = AuthDataSource()
+    
+    @objc private func logoutUser() {
+        
     }
     
-    private func checkIfLogin(user: UserResult?) {
-        if isLogged {
-            userNameLabel.text = "Welcome \(user!.firstName)"
-            loginBtn.setTitle("Logout", for: .normal)
-            emailLabel.text = user!.email
-            userIdLabel.text = user!.alias
-        } else {
-            userNameLabel.text = "Welcome"
-            emailLabel.text = "Please Login"
-            loginBtn.setTitle("Login", for: .normal)
-            userIdLabel.text = ""
-        }
+    private func populateView() {
+        let result = authDataSource.getUserData()
+        userNameLabel.text = "Welcome \(result.0?.firstName ?? "user first name")"
+        emailLabel.text = result.0?.email
+        userIdLabel.text = result.0?.alias
     }
     
     private func setupConstraints() {
@@ -103,10 +87,10 @@ class ProfileViewController: UIViewController {
             profileImageView.heightAnchor.constraint(equalToConstant: 100),
             emailLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emailLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 10),
-            loginBtn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            loginBtn.heightAnchor.constraint(equalToConstant: 50),
-            loginBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loginBtn.widthAnchor.constraint(equalToConstant: 100),
+            logoutBtn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            logoutBtn.heightAnchor.constraint(equalToConstant: 50),
+            logoutBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoutBtn.widthAnchor.constraint(equalToConstant: 100),
         ])
     }
 
@@ -117,10 +101,10 @@ class ProfileViewController: UIViewController {
         view.addSubview(userNameLabel)
         view.addSubview(emailLabel)
         view.addSubview(profileImageView)
-        view.addSubview(loginBtn)
+        view.addSubview(logoutBtn)
         view.addSubview(userSchoolLabel)
         view.addSubview(userIdLabel)
         setupConstraints()
-        checkIfLogin(user: nil)
+        populateView()
     }
 }

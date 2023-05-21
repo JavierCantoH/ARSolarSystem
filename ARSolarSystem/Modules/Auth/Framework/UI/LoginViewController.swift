@@ -92,9 +92,10 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func registerAction() {
-        navigationController?.pushViewController(RegisterRouter.launch(onRegisterSuccess: { [weak self] user in
+        present(RegisterRouter.launch(onRegisterSuccess: { user in
+            print("User registed success: \(user)")
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
-                self?.navigationController?.popViewController(animated: true)
+                self?.dismiss(animated: true)
             }
         }), animated: true)
     }

@@ -103,7 +103,7 @@ class RegisterViewController: UIViewController {
     }()
     
     @objc private func loginAction() {
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true)
     }
     
     @objc private func registerAction() {

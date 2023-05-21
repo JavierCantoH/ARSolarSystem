@@ -14,11 +14,11 @@ class AuthDataSource: AuthDataSourceProtocol {
     
     func registerUser(user: UserRegisterCredentials) throws -> Single<UserResult> {
         return requestRegister(user: user)
-                .do(onSuccess: { user in
-                    if user.email.isEmpty {
-                        throw MyError.error("User without email")
-                    }
-                })
+            .do(onSuccess: { user in
+                print("Register user success: \(user)")
+        }, afterSuccess: nil, onError: { error in
+            throw MyError.error(error.localizedDescription)
+        }, afterError: nil, onSubscribe: nil, onSubscribed: nil, onDispose: nil)
                 .map { response in
                     return response
                 }
@@ -27,9 +27,7 @@ class AuthDataSource: AuthDataSourceProtocol {
     func loginUser(user: UserLoginCredentials) throws -> Single<UserResult> {
         return requestLogin(user: user)
             .do(onSuccess: { [weak self] response in
-                print(response.message)
-                print(response.token)
-                print(response.user)
+                print("Login user success: \(response)")
                 self?.storeUserData(response.user, token: response.token)
         }, afterSuccess: nil, onError: { error in
             throw MyError.error(error.localizedDescription)
