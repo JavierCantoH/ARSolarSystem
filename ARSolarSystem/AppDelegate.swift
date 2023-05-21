@@ -6,38 +6,67 @@
 //
 
 import UIKit
+import RxSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let authDataSource = AuthDataSource.shared
+    let disposeBag = DisposeBag()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
+        checkIfLogin()
+        return true
+    }
+    
+    private func checkIfLogin() {
+        let result = authDataSource.getUserData()
+        
+        result.subscribe(onSuccess: { [weak self] userResult, tokenResult in
+            if let user = userResult, let token = tokenResult {
+                print("User login: \(user)")
+                print("User token: \(token)")
+                // User is logged in, handle the session
+                self?.loginSuccess()
+            } else {
+                // Either user or token (or both) are nil
+                self?.logout()
+            }
+        }, onFailure: { error in
+            print("Error checkIfLogin: \(error)")
+        }).disposed(by: disposeBag)
+    }
+    
+    private func performAction(completion: (() -> Void)? = nil) {
+        completion?()
+    }
+    
+    private func presentTabBarVC() {
         let viewController = TabBarViewController()
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
-        return true
     }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    
+    private func presentLoginScreen() {
+        let viewController = LoginRouter.launch { [weak self] userResult in
+            print("User login success: \(userResult)")
+            self?.loginSuccess()
+        }
+        window?.rootViewController = viewController
+        window?.makeKeyAndVisible()
     }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+    
+    func loginSuccess() {
+        performAction { [weak self] in
+            self?.presentTabBarVC()
+        }
     }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    
+    func logout() {
+        performAction { [weak self] in
+            self?.presentLoginScreen()
+        }
     }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
-
-
 }
-
