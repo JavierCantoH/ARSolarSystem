@@ -240,7 +240,7 @@ extension RegisterViewController: RegisterViewProtocol {
     }
     
     func showLoader() {
-        view.makeToastActivity(.bottom)
+        view.makeToastActivity(.center)
     }
     
     func hideLoader() {

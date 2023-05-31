@@ -16,12 +16,10 @@ class TasksViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.separatorStyle = .none
+        tableView.register(TaskTableViewCell.self, forCellReuseIdentifier: "TaskCell")
+        tableView.separatorStyle = .singleLine
         tableView.backgroundColor = .white
-        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         tableView.showsVerticalScrollIndicator = false
-        tableView.separatorInset = UIEdgeInsets(top: 20, left: 16, bottom: 20, right: 16)
         return tableView
     }()
     
@@ -121,7 +119,6 @@ class TasksViewController: UIViewController {
         todoItems.remove(at: index)
         tableView.reloadData()
     }
-    
 }
 
 
@@ -132,39 +129,14 @@ extension TasksViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let todoItem = todoItems[indexPath.row]
-        cell.textLabel?.text = todoItem.title
-        cell.backgroundColor = .lightGray
-        cell.textLabel?.font = UIFont(name: "Avenir-light", size: 25)
-        cell.textLabel?.textAlignment = .center
-        cell.layer.cornerRadius = 30
-        cell.layer.masksToBounds = true
-        cell.textLabel?.numberOfLines = 0 // set the number of lines to 0
-        cell.textLabel?.lineBreakMode = .byWordWrapping
-        cell.textLabel?.frame = cell.bounds // center the label vertically
-        cell.accessoryType = todoItem.done ? .checkmark : .none
-        
-        let bottomMargin = CGFloat(16)
-        let topMargin = CGFloat(0)
-        cell.contentView.frame = cell.contentView.frame.inset(by: UIEdgeInsets(top: topMargin, left: 0, bottom: bottomMargin, right: 0))
-        
-        let separatorView = UIView()
-        separatorView.backgroundColor = .white
-        separatorView.translatesAutoresizingMaskIntoConstraints = false
-        cell.contentView.addSubview(separatorView)
-        NSLayoutConstraint.activate([
-            separatorView.heightAnchor.constraint(equalToConstant: 8),
-            separatorView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor),
-            separatorView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor),
-            separatorView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor)
-        ])
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskTableViewCell
+            let task = todoItems[indexPath.row]
+            cell.configure(with: task)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80.0 // Set cell height
+        return 100.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -178,27 +150,17 @@ extension TasksViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let editAction = UIContextualAction(style: .normal, title: "Edit") { [weak self] _, _, completionHandler in
-            self?.editTodoItem(at: indexPath.row)
+        let completeAction = UIContextualAction(style: .normal, title: "Complete") { [weak self] _, _, completionHandler in
+            self?.completeTodoItem(at: indexPath.row)
             completionHandler(true)
         }
-        editAction.backgroundColor = .blue
-        return UISwipeActionsConfiguration(actions: [editAction])
+        completeAction.backgroundColor = .green
+        return UISwipeActionsConfiguration(actions: [completeAction])
     }
 
-    private func editTodoItem(at index: Int) {
-        let alert = UIAlertController(title: "Edit Todo", message: nil, preferredStyle: .alert)
-        alert.addTextField { textField in
-            textField.text = self.todoItems[index].title
-        }
-        let updateAction = UIAlertAction(title: "Update", style: .default) { [weak self] _ in
-            guard let title = alert.textFields?.first?.text else { return }
-            self?.updateTodoItem(at: index, withTitle: title)
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alert.addAction(updateAction)
-        alert.addAction(cancelAction)
-        present(alert, animated: true, completion: nil)
+    private func completeTodoItem(at index: Int) {
+        todoItems[index].done = true
+        tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .fade)
     }
 }
 
@@ -229,29 +191,23 @@ extension TasksViewController: TasksViewProtocol {
 extension TasksViewController: UIDocumentPickerDelegate {
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        guard let fileURL = urls.first else {
-            // Handle the case when no file is picked
-            return
-        }
-        
+        guard let fileURL = urls.first else { return }
         uploadCSVFile(fileURL: fileURL)
     }
     
     func uploadCSVFile(fileURL: URL) {
-        guard let csvData = try? Data(contentsOf: fileURL) else {
-            // Handle the case when unable to read the file
-            return
-        }
+        guard let csvData = try? Data(contentsOf: fileURL) else { return}
         
         let url = "http://localhost:3000/tasks/file"
         
         AF.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(csvData, withName: "taskFile", fileName: "data.csv", mimeType: "text/csv")
         }, to: url).response { response in
-            // Handle the response from the server
             debugPrint(response)
         }
-        
-        presenter?.getTasks()
+        showLoader()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            self.presenter?.getTasks()
+        }
     }
 }

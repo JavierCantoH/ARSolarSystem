@@ -220,7 +220,7 @@ extension LoginViewController: LoginViewProtocol {
     }
     
     func showLoader() {
-        view.makeToastActivity(.bottom)
+        view.makeToastActivity(.center)
     }
     
     func hideLoader() {

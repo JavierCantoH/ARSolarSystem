@@ -47,6 +47,7 @@
 		EC79EE092A25AD81002F5D21 /* TasksViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79EE082A25AD81002F5D21 /* TasksViewProtocol.swift */; };
 		EC79EE0B2A25ADA2002F5D21 /* TasksRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79EE0A2A25ADA2002F5D21 /* TasksRouter.swift */; };
 		EC79EE0D2A25ADA8002F5D21 /* TasksRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79EE0C2A25ADA8002F5D21 /* TasksRouterProtocol.swift */; };
+		EC79EE552A271510002F5D21 /* TasksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79EE542A271510002F5D21 /* TasksTableViewCell.swift */; };
 		EC85E93A2A218722004A1786 /* SolarSystemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC85E9392A218722004A1786 /* SolarSystemRepository.swift */; };
 		EC85E93C2A21872A004A1786 /* SolarSystemRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC85E93B2A21872A004A1786 /* SolarSystemRepositoryProtocol.swift */; };
 		EC85E93E2A218737004A1786 /* SolarSystemDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC85E93D2A218737004A1786 /* SolarSystemDataSourceProtocol.swift */; };
@@ -111,6 +112,7 @@
 		EC79EE082A25AD81002F5D21 /* TasksViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewProtocol.swift; sourceTree = "<group>"; };
 		EC79EE0A2A25ADA2002F5D21 /* TasksRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksRouter.swift; sourceTree = "<group>"; };
 		EC79EE0C2A25ADA8002F5D21 /* TasksRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksRouterProtocol.swift; sourceTree = "<group>"; };
+		EC79EE542A271510002F5D21 /* TasksTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewCell.swift; sourceTree = "<group>"; };
 		EC85E9392A218722004A1786 /* SolarSystemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemRepository.swift; sourceTree = "<group>"; };
 		EC85E93B2A21872A004A1786 /* SolarSystemRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemRepositoryProtocol.swift; sourceTree = "<group>"; };
 		EC85E93D2A218737004A1786 /* SolarSystemDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemDataSourceProtocol.swift; sourceTree = "<group>"; };
@@ -481,9 +483,18 @@
 		EC79EDF92A25AD03002F5D21 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				EC79EE532A2714FE002F5D21 /* CustomViews */,
 				EC764B512A047EDA0094E0F2 /* TasksViewController.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		EC79EE532A2714FE002F5D21 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				EC79EE542A271510002F5D21 /* TasksTableViewCell.swift */,
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 		EC85E92D2A2185C0004A1786 /* Data */ = {
@@ -738,6 +749,7 @@
 				EC85E94A2A21878A004A1786 /* PlanetResponse.swift in Sources */,
 				EC4AA71B2A16B93A003237F1 /* LoginRouter.swift in Sources */,
 				EC03BFF32A0593C6006AC128 /* AuthDataSourceProtocol.swift in Sources */,
+				EC79EE552A271510002F5D21 /* TasksTableViewCell.swift in Sources */,
 				ECF8A4C12A1AA98300819451 /* ProfilePresenter.swift in Sources */,
 				EC4AA70D2A16B32B003237F1 /* LoginUseCase.swift in Sources */,
 				EC85E93C2A21872A004A1786 /* SolarSystemRepositoryProtocol.swift in Sources */,

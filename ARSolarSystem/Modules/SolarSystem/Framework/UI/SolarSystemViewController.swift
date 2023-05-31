@@ -321,9 +321,7 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         nextFactButton.isHidden = false
         currentPlanet = tappedNode
         currentFactIndex = 0
-        if let _ = currentPlanet.name, let facts = planetTapped?.facts {
-            infoLabel.text = facts[0]
-        }
+        infoLabel.text = "Learn more about \(tappedNode.name?.capitalized ?? "it here")"
     }
 
     private func createText(planetName: String, planetNode: SCNNode) -> SCNNode {
@@ -414,26 +412,18 @@ extension SolarSystemViewController: SolarSystemViewProtocol {
 extension SolarSystemViewController: UIDocumentPickerDelegate {
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        guard let fileURL = urls.first else {
-            // Handle the case when no file is picked
-            return
-        }
-        
+        guard let fileURL = urls.first else { return }
         uploadCSVFile(fileURL: fileURL)
     }
     
     func uploadCSVFile(fileURL: URL) {
-        guard let csvData = try? Data(contentsOf: fileURL) else {
-            // Handle the case when unable to read the file
-            return
-        }
+        guard let csvData = try? Data(contentsOf: fileURL) else { return }
         
         let url = "http://localhost:3000/planet/file"
         
         AF.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(csvData, withName: "planetFile", fileName: "data.csv", mimeType: "text/csv")
         }, to: url).response { response in
-            // Handle the response from the server
             debugPrint(response)
         }
     }
