@@ -10,6 +10,7 @@ import UIKit
 import SceneKit
 import ARKit
 import Toast
+import Alamofire
 
 class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
     
@@ -271,10 +272,9 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
                 tappedNodeCopy.runAction(action)
             }
             // planet title
+            checkTappedNodeInfo(tappedNode: tappedNodeCopy)
             baseNode.addChildNode(createText(planetName: tappedNodeCopy.name ?? "", planetNode: tappedNodeCopy))
-            currentPlanet = tappedNodeCopy
             backRoundBtn.isHidden = false
-            currentPlanet = tappedNode
             presenter?.getPlanetInfo(planetName: tappedNodeCopy.name!)
         }
     }
@@ -316,9 +316,10 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         infoLabel.text = fact
     }
     
-    private func checkTappedNodeInfo() {
+    private func checkTappedNodeInfo(tappedNode: SCNNode) {
         infoLabel.isHidden = false
         nextFactButton.isHidden = false
+        currentPlanet = tappedNode
         currentFactIndex = 0
         if let _ = currentPlanet.name, let facts = planetTapped?.facts {
             infoLabel.text = facts[0]
@@ -392,11 +393,10 @@ extension SolarSystemViewController: SolarSystemViewProtocol {
     
     func showPlaneInfo(planetInfo: PlanetResponse) {
         planetTapped = planetInfo
-        checkTappedNodeInfo()
     }
     
     func showLoader() {
-        view.makeToastActivity(.bottom)
+        view.makeToastActivity(.center)
     }
     
     func hideLoader() {
@@ -414,47 +414,27 @@ extension SolarSystemViewController: SolarSystemViewProtocol {
 extension SolarSystemViewController: UIDocumentPickerDelegate {
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        guard let pickedURL = urls.first else {
-            // Handle error, no URL available
+        guard let fileURL = urls.first else {
+            // Handle the case when no file is picked
             return
         }
-
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let destinationURL = documentsDirectory.appendingPathComponent(pickedURL.lastPathComponent)
-
-        do {
-            let fileManager = FileManager.default
-            try fileManager.moveItem(at: pickedURL, to: destinationURL)
-
-            let apiURL = URL(string: "http://localhost:3000/planet/file")!
-            var request = URLRequest(url: apiURL)
-            request.httpMethod = "POST"
-
-            let session = URLSession.shared
-
-            let task = session.uploadTask(with: request, fromFile: destinationURL) { responseData, response, error in
-                if let error = error {
-                    // Handle the error
-                    print("Error uploading file: \(error)")
-                    return
-                }
-
-                // Handle the API response
-                if let httpResponse = response as? HTTPURLResponse {
-                    if httpResponse.statusCode == 200 {
-                        // File uploaded successfully
-                        print("File uploaded successfully")
-                    } else {
-                        // Handle other HTTP status codes
-                        print("Error uploading file. HTTP status code: \(httpResponse.statusCode)")
-                    }
-                }
-            }
-
-            task.resume()
-        } catch {
-            // Handle error while saving the file
-            print("Error saving file: \(error)")
+        
+        uploadCSVFile(fileURL: fileURL)
+    }
+    
+    func uploadCSVFile(fileURL: URL) {
+        guard let csvData = try? Data(contentsOf: fileURL) else {
+            // Handle the case when unable to read the file
+            return
+        }
+        
+        let url = "http://localhost:3000/planet/file"
+        
+        AF.upload(multipartFormData: { multipartFormData in
+            multipartFormData.append(csvData, withName: "planetFile", fileName: "data.csv", mimeType: "text/csv")
+        }, to: url).response { response in
+            // Handle the response from the server
+            debugPrint(response)
         }
     }
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 import Toast
+import Alamofire
 
 class TasksViewController: UIViewController {
     
@@ -72,11 +73,11 @@ class TasksViewController: UIViewController {
     }
     
     private func setupNavItems() {
-        let addTodoButton = UIBarButtonItem(image: UIImage(systemName: "plus.app"), style: .plain, target: self, action: #selector(addTodo))
+        //let addTodoButton = UIBarButtonItem(image: UIImage(systemName: "plus.app"), style: .plain, target: self, action: #selector(addTodo))
         let addFileButton = UIBarButtonItem(image: UIImage(systemName: "folder.badge.plus"), style: .plain, target: self, action: #selector(addFile))
-        addTodoButton.tintColor = .white
+        //addTodoButton.tintColor = .white
         addFileButton.tintColor = .white
-        navigationItem.rightBarButtonItems = [addTodoButton, addFileButton]
+        navigationItem.rightBarButtonItems = [addFileButton]
     }
     
     @objc private func addTodo() {
@@ -204,12 +205,13 @@ extension TasksViewController: UITableViewDataSource, UITableViewDelegate {
 extension TasksViewController: TasksViewProtocol {
     
     func showTasks(tasks: TasksResponse) {
+        todoItems.removeAll()
         todoItems.append(contentsOf: tasks.tasksArray)
         tableView.reloadData()
     }
     
     func showLoader() {
-        view.makeToastActivity(.bottom)
+        view.makeToastActivity(.center)
     }
     
     func hideLoader() {
@@ -225,48 +227,31 @@ extension TasksViewController: TasksViewProtocol {
 }
 
 extension TasksViewController: UIDocumentPickerDelegate {
+    
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        guard let pickedURL = urls.first else {
-            // Handle error, no URL available
+        guard let fileURL = urls.first else {
+            // Handle the case when no file is picked
             return
         }
-
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let destinationURL = documentsDirectory.appendingPathComponent(pickedURL.lastPathComponent)
-
-        do {
-            let fileManager = FileManager.default
-            try fileManager.moveItem(at: pickedURL, to: destinationURL)
-
-            let apiURL = URL(string: "http://localhost:3000/tasks")!
-            var request = URLRequest(url: apiURL)
-            request.httpMethod = "POST"
-
-            let session = URLSession.shared
-
-            let task = session.uploadTask(with: request, fromFile: destinationURL) { responseData, response, error in
-                if let error = error {
-                    // Handle the error
-                    print("Error uploading file: \(error)")
-                    return
-                }
-
-                // Handle the API response
-                if let httpResponse = response as? HTTPURLResponse {
-                    if httpResponse.statusCode == 200 {
-                        // File uploaded successfully
-                        print("File uploaded successfully")
-                    } else {
-                        // Handle other HTTP status codes
-                        print("Error uploading file. HTTP status code: \(httpResponse.statusCode)")
-                    }
-                }
-            }
-
-            task.resume()
-        } catch {
-            // Handle error while saving the file
-            print("Error saving file: \(error)")
+        
+        uploadCSVFile(fileURL: fileURL)
+    }
+    
+    func uploadCSVFile(fileURL: URL) {
+        guard let csvData = try? Data(contentsOf: fileURL) else {
+            // Handle the case when unable to read the file
+            return
         }
+        
+        let url = "http://localhost:3000/tasks/file"
+        
+        AF.upload(multipartFormData: { multipartFormData in
+            multipartFormData.append(csvData, withName: "taskFile", fileName: "data.csv", mimeType: "text/csv")
+        }, to: url).response { response in
+            // Handle the response from the server
+            debugPrint(response)
+        }
+        
+        presenter?.getTasks()
     }
 }

@@ -25,8 +25,7 @@ class TasksDataSource: TasksDataSourceProtocol {
     
     private func requestTasks() -> Single<TasksResponse> {
         return Single.create { observable in
-            AF.request("http://localhost:3000/tasks", method: .get, parameters: [:], encoding: JSONEncoding.default, headers: nil)
-                .validate()
+            AF.request("http://localhost:3000/tasks", method: .get, encoding: JSONEncoding.default, headers: nil)
                 .responseDecodable(of: TasksResponse.self) { response in
                     print(response)
                     switch response.result {

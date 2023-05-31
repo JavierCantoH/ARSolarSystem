@@ -32,7 +32,7 @@ class TasksPresenter: TasksPresenterProtocol {
                     self?.view?.showTasks(tasks: response)
                 }, onFailure: { [weak self] error in
                     self?.view?.hideLoader()
-                    self?.view?.showError(message: "No tasks available")
+                    self?.view?.showError(message: error.localizedDescription)
                 }, onDisposed: nil).disposed(by: disposeBag)
         } catch {
             view?.showError(message: error.localizedDescription)
