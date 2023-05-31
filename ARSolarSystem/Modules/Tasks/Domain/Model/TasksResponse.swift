@@ -8,14 +8,14 @@
 import Foundation
 
 struct TasksResponse: Codable {
-    var tasksArray: [Tasks]
+    var tasksArray: [Task]
     
     enum CodingKeys: String, CodingKey {
         case tasksArray = "Tasks"
     }
 }
 
-struct Tasks: Codable {
+struct Task: Codable {
     var title: String
     var date: String
     var description: String

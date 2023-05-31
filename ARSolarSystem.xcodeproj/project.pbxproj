@@ -36,7 +36,6 @@
 		EC70606D29E9E06C00F729A7 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC70606C29E9E06C00F729A7 /* TabBarViewController.swift */; };
 		EC70607029E9E12B00F729A7 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC70606F29E9E12B00F729A7 /* ProfileViewController.swift */; };
 		EC764B522A047EDA0094E0F2 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC764B512A047EDA0094E0F2 /* TasksViewController.swift */; };
-		EC764B552A04B4AF0094E0F2 /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC764B542A04B4AF0094E0F2 /* TodoItem.swift */; };
 		EC79EDF12A25ACB6002F5D21 /* TasksResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79EDF02A25ACB6002F5D21 /* TasksResponse.swift */; };
 		EC79EDFB2A25AD2F002F5D21 /* TasksRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79EDFA2A25AD2F002F5D21 /* TasksRepository.swift */; };
 		EC79EDFD2A25AD3C002F5D21 /* TasksDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79EDFC2A25AD3C002F5D21 /* TasksDataSourceProtocol.swift */; };
@@ -101,7 +100,6 @@
 		EC70606C29E9E06C00F729A7 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		EC70606F29E9E12B00F729A7 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EC764B512A047EDA0094E0F2 /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
-		EC764B542A04B4AF0094E0F2 /* TodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
 		EC79EDF02A25ACB6002F5D21 /* TasksResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksResponse.swift; sourceTree = "<group>"; };
 		EC79EDFA2A25AD2F002F5D21 /* TasksRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksRepository.swift; sourceTree = "<group>"; };
 		EC79EDFC2A25AD3C002F5D21 /* TasksDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksDataSourceProtocol.swift; sourceTree = "<group>"; };
@@ -386,7 +384,6 @@
 		EC764B532A04B4A30094E0F2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				EC764B542A04B4AF0094E0F2 /* TodoItem.swift */,
 				EC79EDF02A25ACB6002F5D21 /* TasksResponse.swift */,
 			);
 			path = Model;
@@ -735,7 +732,6 @@
 				ECD291AD29E5E970002DFAFA /* LoginViewController.swift in Sources */,
 				EC79EE052A25AD72002F5D21 /* TasksPresenterProtocol.swift in Sources */,
 				ECF8A4C32A1AA98C00819451 /* ProfileViewProtocol.swift in Sources */,
-				EC764B552A04B4AF0094E0F2 /* TodoItem.swift in Sources */,
 				EC03C0002A05964C006AC128 /* BaseView.swift in Sources */,
 				EC03BFFD2A059546006AC128 /* AuthDataSource.swift in Sources */,
 				EC03BFFB2A0594F9006AC128 /* RegisterUseCase.swift in Sources */,

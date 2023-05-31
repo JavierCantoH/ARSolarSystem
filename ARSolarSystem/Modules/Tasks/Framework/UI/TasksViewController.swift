@@ -10,7 +10,7 @@ import Toast
 
 class TasksViewController: UIViewController {
     
-    private var todoItems = [TodoItem]()
+    private var todoItems = [Task]()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -102,7 +102,7 @@ class TasksViewController: UIViewController {
     }
     
     private func addTodoItem(title: String) {
-        let todoItem = TodoItem(title: title , completed: false)
+        let todoItem = Task(title: title, date: "", description: "", done: false)
         todoItems.append(todoItem)
         tableView.reloadData()
         let contentHeight = tableView.contentSize.height
@@ -142,7 +142,7 @@ extension TasksViewController: UITableViewDataSource, UITableViewDelegate {
         cell.textLabel?.numberOfLines = 0 // set the number of lines to 0
         cell.textLabel?.lineBreakMode = .byWordWrapping
         cell.textLabel?.frame = cell.bounds // center the label vertically
-        cell.accessoryType = todoItem.completed ? .checkmark : .none
+        cell.accessoryType = todoItem.done ? .checkmark : .none
         
         let bottomMargin = CGFloat(16)
         let topMargin = CGFloat(0)
@@ -204,7 +204,8 @@ extension TasksViewController: UITableViewDataSource, UITableViewDelegate {
 extension TasksViewController: TasksViewProtocol {
     
     func showTasks(tasks: TasksResponse) {
-        // TODO SHOW TASKS IN TABLE VIEW
+        todoItems.append(contentsOf: tasks.tasksArray)
+        tableView.reloadData()
     }
     
     func showLoader() {
