@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast
 
 class TasksViewController: UIViewController {
     
@@ -23,10 +24,34 @@ class TasksViewController: UIViewController {
         return tableView
     }()
     
+    private lazy var toastStyleMissElements: ToastStyle = {
+        var style = ToastStyle()
+        style.backgroundColor = .red
+        style.titleColor = .white
+        style.imageSize = CGSize(width: 50, height: 50)
+        return style
+    }()
+    
+    private lazy var toastStyleComplete: ToastStyle = {
+        var style = ToastStyle()
+        style.backgroundColor = .green
+        style.titleColor = .white
+        style.imageSize = CGSize(width: 50, height: 50)
+        return style
+    }()
+    
+    var presenter: TasksPresenterProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        presenter?.attachView(view: self)
         setupSubviews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.getTasks()
     }
     
     private func setupSubviews() {
@@ -48,8 +73,10 @@ class TasksViewController: UIViewController {
     
     private func setupNavItems() {
         let addTodoButton = UIBarButtonItem(image: UIImage(systemName: "plus.app"), style: .plain, target: self, action: #selector(addTodo))
+        let addFileButton = UIBarButtonItem(image: UIImage(systemName: "folder.badge.plus"), style: .plain, target: self, action: #selector(addFile))
         addTodoButton.tintColor = .white
-        navigationItem.rightBarButtonItem = addTodoButton
+        addFileButton.tintColor = .white
+        navigationItem.rightBarButtonItems = [addTodoButton, addFileButton]
     }
     
     @objc private func addTodo() {
@@ -66,6 +93,12 @@ class TasksViewController: UIViewController {
         }
         alert.addAction(addAction)
         present(alert, animated: true, completion: nil)
+    }
+    
+    @objc private func addFile() {
+        let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data"], in: .import)
+        documentPicker.delegate = self
+        present(documentPicker, animated: true, completion: nil)
     }
     
     private func addTodoItem(title: String) {
@@ -165,5 +198,74 @@ extension TasksViewController: UITableViewDataSource, UITableViewDelegate {
         alert.addAction(updateAction)
         alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
+    }
+}
+
+extension TasksViewController: TasksViewProtocol {
+    
+    func showTasks(tasks: TasksResponse) {
+        // TODO SHOW TASKS IN TABLE VIEW
+    }
+    
+    func showLoader() {
+        view.makeToastActivity(.bottom)
+    }
+    
+    func hideLoader() {
+        view.hideToastActivity()
+    }
+    
+    func showError(message: String) {
+        if let image = UIImage(systemName: "exclamationmark.square.fill") {
+            let tintedImage = image.withTintColor(.white, renderingMode: .alwaysOriginal)
+            view.makeToast(message, duration: 2.0, position: .center, title: "Ups!", image: tintedImage, style: toastStyleMissElements)
+        }
+    }
+}
+
+extension TasksViewController: UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard let pickedURL = urls.first else {
+            // Handle error, no URL available
+            return
+        }
+
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let destinationURL = documentsDirectory.appendingPathComponent(pickedURL.lastPathComponent)
+
+        do {
+            let fileManager = FileManager.default
+            try fileManager.moveItem(at: pickedURL, to: destinationURL)
+
+            let apiURL = URL(string: "http://localhost:3000/tasks")!
+            var request = URLRequest(url: apiURL)
+            request.httpMethod = "POST"
+
+            let session = URLSession.shared
+
+            let task = session.uploadTask(with: request, fromFile: destinationURL) { responseData, response, error in
+                if let error = error {
+                    // Handle the error
+                    print("Error uploading file: \(error)")
+                    return
+                }
+
+                // Handle the API response
+                if let httpResponse = response as? HTTPURLResponse {
+                    if httpResponse.statusCode == 200 {
+                        // File uploaded successfully
+                        print("File uploaded successfully")
+                    } else {
+                        // Handle other HTTP status codes
+                        print("Error uploading file. HTTP status code: \(httpResponse.statusCode)")
+                    }
+                }
+            }
+
+            task.resume()
+        } catch {
+            // Handle error while saving the file
+            print("Error saving file: \(error)")
+        }
     }
 }

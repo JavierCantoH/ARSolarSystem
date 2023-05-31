@@ -13,8 +13,8 @@ class TabBarViewController: UITabBarController {
         super.viewDidLoad()
         // Sets up view controllers for the tab bar.
         viewControllers = [
-            createNavController(for: SolarSystemViewController(), title: "Discover", imageName: "globe.americas"),
-            createNavController(for: TasksViewController(), title: "Tasks", imageName: "checklist"),
+            createNavController(for: SolarSystemRouter.launch(), title: "Discover", imageName: "globe.americas"),
+            createNavController(for: TasksRouter.launch(), title: "Tasks", imageName: "checklist"),
             createNavController(for: ProfileRouter.launch(), title: "Profile", imageName: "person.circle"),
         ]
     }

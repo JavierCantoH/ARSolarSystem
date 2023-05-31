@@ -37,7 +37,7 @@ class RegisterPresenter: RegisterPresenterProtocol {
             return
         }
         guard isSafePassword(password: user.password) else {
-            view?.showError(message: "Please enter a safe password")
+            view?.showError(message: "The password must be at least 8 characters long. Must contain at least one alphabetic character. Must contain at least one numeric character. No special symbols.")
             return
         }
         view?.showLoader()
@@ -62,7 +62,6 @@ class RegisterPresenter: RegisterPresenterProtocol {
         return emailPredicate.evaluate(with: email)
     }
     
-    // The password must be at least 8 characters long. Must contain at least one alphabetic character (A-Z or a-z).Must contain at least one numeric character (0-9).
     private func isSafePassword(password: String) -> Bool {
         let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$"
         let passwordPredicate = NSPredicate(format:"SELF MATCHES %@", passwordRegex)

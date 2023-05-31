@@ -37,12 +37,33 @@
 		EC70607029E9E12B00F729A7 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC70606F29E9E12B00F729A7 /* ProfileViewController.swift */; };
 		EC764B522A047EDA0094E0F2 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC764B512A047EDA0094E0F2 /* TasksViewController.swift */; };
 		EC764B552A04B4AF0094E0F2 /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC764B542A04B4AF0094E0F2 /* TodoItem.swift */; };
+		EC79EDF12A25ACB6002F5D21 /* TasksResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79EDF02A25ACB6002F5D21 /* TasksResponse.swift */; };
+		EC79EDFB2A25AD2F002F5D21 /* TasksRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79EDFA2A25AD2F002F5D21 /* TasksRepository.swift */; };
+		EC79EDFD2A25AD3C002F5D21 /* TasksDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79EDFC2A25AD3C002F5D21 /* TasksDataSourceProtocol.swift */; };
+		EC79EDFF2A25AD4A002F5D21 /* TasksRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79EDFE2A25AD4A002F5D21 /* TasksRepositoryProtocol.swift */; };
+		EC79EE012A25AD58002F5D21 /* TasksDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79EE002A25AD58002F5D21 /* TasksDataSource.swift */; };
+		EC79EE032A25AD64002F5D21 /* GetTasksUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79EE022A25AD64002F5D21 /* GetTasksUseCase.swift */; };
+		EC79EE052A25AD72002F5D21 /* TasksPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79EE042A25AD72002F5D21 /* TasksPresenterProtocol.swift */; };
+		EC79EE072A25AD77002F5D21 /* TasksPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79EE062A25AD77002F5D21 /* TasksPresenter.swift */; };
+		EC79EE092A25AD81002F5D21 /* TasksViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79EE082A25AD81002F5D21 /* TasksViewProtocol.swift */; };
+		EC79EE0B2A25ADA2002F5D21 /* TasksRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79EE0A2A25ADA2002F5D21 /* TasksRouter.swift */; };
+		EC79EE0D2A25ADA8002F5D21 /* TasksRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79EE0C2A25ADA8002F5D21 /* TasksRouterProtocol.swift */; };
+		EC85E93A2A218722004A1786 /* SolarSystemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC85E9392A218722004A1786 /* SolarSystemRepository.swift */; };
+		EC85E93C2A21872A004A1786 /* SolarSystemRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC85E93B2A21872A004A1786 /* SolarSystemRepositoryProtocol.swift */; };
+		EC85E93E2A218737004A1786 /* SolarSystemDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC85E93D2A218737004A1786 /* SolarSystemDataSourceProtocol.swift */; };
+		EC85E9402A218743004A1786 /* SolarSystemDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC85E93F2A218743004A1786 /* SolarSystemDataSource.swift */; };
+		EC85E9422A218750004A1786 /* SolarSystemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC85E9412A218750004A1786 /* SolarSystemPresenter.swift */; };
+		EC85E9442A218758004A1786 /* SolarSystemPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC85E9432A218758004A1786 /* SolarSystemPresenterProtocol.swift */; };
+		EC85E9462A218767004A1786 /* SolarSystemRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC85E9452A218767004A1786 /* SolarSystemRouter.swift */; };
+		EC85E9482A218771004A1786 /* SolarSystemRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC85E9472A218771004A1786 /* SolarSystemRouterProtocol.swift */; };
+		EC85E94A2A21878A004A1786 /* PlanetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC85E9492A21878A004A1786 /* PlanetResponse.swift */; };
+		EC85E94C2A21879D004A1786 /* GetPlanetsInformationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC85E94B2A21879D004A1786 /* GetPlanetsInformationUseCase.swift */; };
+		EC85E94E2A218AC4004A1786 /* SolarSystemViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC85E94D2A218AC4004A1786 /* SolarSystemViewProtocol.swift */; };
 		ECD2913E29CF8DBE002DFAFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD2913D29CF8DBE002DFAFA /* AppDelegate.swift */; };
 		ECD2914029CF8DBE002DFAFA /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ECD2913F29CF8DBE002DFAFA /* art.scnassets */; };
 		ECD2914229CF8DBE002DFAFA /* SolarSystemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD2914129CF8DBE002DFAFA /* SolarSystemViewController.swift */; };
 		ECD2914729CF8DBF002DFAFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECD2914629CF8DBF002DFAFA /* Assets.xcassets */; };
 		ECD2914A29CF8DBF002DFAFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECD2914829CF8DBF002DFAFA /* LaunchScreen.storyboard */; };
-		ECD291AB29E5E83F002DFAFA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD291AA29E5E83F002DFAFA /* MainViewController.swift */; };
 		ECD291AD29E5E970002DFAFA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD291AC29E5E970002DFAFA /* LoginViewController.swift */; };
 		ECD291AF29E5E979002DFAFA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD291AE29E5E979002DFAFA /* RegisterViewController.swift */; };
 		ECF8A4BC2A1AA90E00819451 /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF8A4BB2A1AA90E00819451 /* LogoutUseCase.swift */; };
@@ -81,13 +102,34 @@
 		EC70606F29E9E12B00F729A7 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EC764B512A047EDA0094E0F2 /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
 		EC764B542A04B4AF0094E0F2 /* TodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
+		EC79EDF02A25ACB6002F5D21 /* TasksResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksResponse.swift; sourceTree = "<group>"; };
+		EC79EDFA2A25AD2F002F5D21 /* TasksRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksRepository.swift; sourceTree = "<group>"; };
+		EC79EDFC2A25AD3C002F5D21 /* TasksDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksDataSourceProtocol.swift; sourceTree = "<group>"; };
+		EC79EDFE2A25AD4A002F5D21 /* TasksRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksRepositoryProtocol.swift; sourceTree = "<group>"; };
+		EC79EE002A25AD58002F5D21 /* TasksDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksDataSource.swift; sourceTree = "<group>"; };
+		EC79EE022A25AD64002F5D21 /* GetTasksUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTasksUseCase.swift; sourceTree = "<group>"; };
+		EC79EE042A25AD72002F5D21 /* TasksPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksPresenterProtocol.swift; sourceTree = "<group>"; };
+		EC79EE062A25AD77002F5D21 /* TasksPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksPresenter.swift; sourceTree = "<group>"; };
+		EC79EE082A25AD81002F5D21 /* TasksViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewProtocol.swift; sourceTree = "<group>"; };
+		EC79EE0A2A25ADA2002F5D21 /* TasksRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksRouter.swift; sourceTree = "<group>"; };
+		EC79EE0C2A25ADA8002F5D21 /* TasksRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksRouterProtocol.swift; sourceTree = "<group>"; };
+		EC85E9392A218722004A1786 /* SolarSystemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemRepository.swift; sourceTree = "<group>"; };
+		EC85E93B2A21872A004A1786 /* SolarSystemRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemRepositoryProtocol.swift; sourceTree = "<group>"; };
+		EC85E93D2A218737004A1786 /* SolarSystemDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemDataSourceProtocol.swift; sourceTree = "<group>"; };
+		EC85E93F2A218743004A1786 /* SolarSystemDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemDataSource.swift; sourceTree = "<group>"; };
+		EC85E9412A218750004A1786 /* SolarSystemPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemPresenter.swift; sourceTree = "<group>"; };
+		EC85E9432A218758004A1786 /* SolarSystemPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemPresenterProtocol.swift; sourceTree = "<group>"; };
+		EC85E9452A218767004A1786 /* SolarSystemRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemRouter.swift; sourceTree = "<group>"; };
+		EC85E9472A218771004A1786 /* SolarSystemRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemRouterProtocol.swift; sourceTree = "<group>"; };
+		EC85E9492A21878A004A1786 /* PlanetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetResponse.swift; sourceTree = "<group>"; };
+		EC85E94B2A21879D004A1786 /* GetPlanetsInformationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPlanetsInformationUseCase.swift; sourceTree = "<group>"; };
+		EC85E94D2A218AC4004A1786 /* SolarSystemViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemViewProtocol.swift; sourceTree = "<group>"; };
 		ECD2913A29CF8DBE002DFAFA /* ARSolarSystem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARSolarSystem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECD2913D29CF8DBE002DFAFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECD2913F29CF8DBE002DFAFA /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		ECD2914129CF8DBE002DFAFA /* SolarSystemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemViewController.swift; sourceTree = "<group>"; };
 		ECD2914629CF8DBF002DFAFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECD2914929CF8DBF002DFAFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		ECD291AA29E5E83F002DFAFA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		ECD291AC29E5E970002DFAFA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ECD291AE29E5E979002DFAFA /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		ECF8A4BB2A1AA90E00819451 /* LogoutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutUseCase.swift; sourceTree = "<group>"; };
@@ -296,19 +338,21 @@
 			children = (
 				EC764B502A047EC10094E0F2 /* Tasks */,
 				EC70606B29E9E03700F729A7 /* BottomMenu */,
-				EC70606A29E9D07E00F729A7 /* Main */,
 				EC70606929E9D06E00F729A7 /* Auth */,
-				EC70606729E9D05C00F729A7 /* solarSystem */,
+				EC70606729E9D05C00F729A7 /* SolarSystem */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
 		};
-		EC70606729E9D05C00F729A7 /* solarSystem */ = {
+		EC70606729E9D05C00F729A7 /* SolarSystem */ = {
 			isa = PBXGroup;
 			children = (
-				ECD2914129CF8DBE002DFAFA /* SolarSystemViewController.swift */,
+				EC85E92D2A2185C0004A1786 /* Data */,
+				EC85E92F2A2185CE004A1786 /* Domain */,
+				EC85E92E2A2185C4004A1786 /* Framework */,
+				ECD2913D29CF8DBE002DFAFA /* AppDelegate.swift */,
 			);
-			path = solarSystem;
+			path = SolarSystem;
 			sourceTree = "<group>";
 		};
 		EC70606929E9D06E00F729A7 /* Auth */ = {
@@ -319,14 +363,6 @@
 				EC03BFDE2A059281006AC128 /* Framework */,
 			);
 			path = Auth;
-			sourceTree = "<group>";
-		};
-		EC70606A29E9D07E00F729A7 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				ECD291AA29E5E83F002DFAFA /* MainViewController.swift */,
-			);
-			path = Main;
 			sourceTree = "<group>";
 		};
 		EC70606B29E9E03700F729A7 /* BottomMenu */ = {
@@ -340,8 +376,9 @@
 		EC764B502A047EC10094E0F2 /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
-				EC764B532A04B4A30094E0F2 /* Model */,
-				EC764B512A047EDA0094E0F2 /* TasksViewController.swift */,
+				EC79EDED2A25AC8A002F5D21 /* Data */,
+				EC79EDEE2A25AC91002F5D21 /* Domain */,
+				EC79EDEF2A25AC95002F5D21 /* Framework */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -350,8 +387,211 @@
 			isa = PBXGroup;
 			children = (
 				EC764B542A04B4AF0094E0F2 /* TodoItem.swift */,
+				EC79EDF02A25ACB6002F5D21 /* TasksResponse.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		EC79EDED2A25AC8A002F5D21 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				EC79EDF32A25ACD4002F5D21 /* Repository */,
+				EC79EDF22A25ACCE002F5D21 /* DataSource */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		EC79EDEE2A25AC91002F5D21 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				EC79EDF52A25ACE5002F5D21 /* UseCase */,
+				EC79EDF42A25ACDD002F5D21 /* Repository */,
+				EC764B532A04B4A30094E0F2 /* Model */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		EC79EDEF2A25AC95002F5D21 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				EC79EDF62A25ACF1002F5D21 /* Data */,
+				EC79EDF72A25ACF9002F5D21 /* Presenter */,
+				EC79EDF92A25AD03002F5D21 /* UI */,
+				EC79EDF82A25ACFF002F5D21 /* Router */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
+		EC79EDF22A25ACCE002F5D21 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				EC79EDFC2A25AD3C002F5D21 /* TasksDataSourceProtocol.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		EC79EDF32A25ACD4002F5D21 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				EC79EDFA2A25AD2F002F5D21 /* TasksRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		EC79EDF42A25ACDD002F5D21 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				EC79EDFE2A25AD4A002F5D21 /* TasksRepositoryProtocol.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		EC79EDF52A25ACE5002F5D21 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				EC79EE022A25AD64002F5D21 /* GetTasksUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		EC79EDF62A25ACF1002F5D21 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				EC79EE002A25AD58002F5D21 /* TasksDataSource.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		EC79EDF72A25ACF9002F5D21 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				EC79EE042A25AD72002F5D21 /* TasksPresenterProtocol.swift */,
+				EC79EE062A25AD77002F5D21 /* TasksPresenter.swift */,
+				EC79EE082A25AD81002F5D21 /* TasksViewProtocol.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		EC79EDF82A25ACFF002F5D21 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				EC79EE0C2A25ADA8002F5D21 /* TasksRouterProtocol.swift */,
+				EC79EE0A2A25ADA2002F5D21 /* TasksRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		EC79EDF92A25AD03002F5D21 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				EC764B512A047EDA0094E0F2 /* TasksViewController.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		EC85E92D2A2185C0004A1786 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				EC85E9312A2185E5004A1786 /* DataSource */,
+				EC85E9322A2185EE004A1786 /* Repository */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		EC85E92E2A2185C4004A1786 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				EC85E9382A21861C004A1786 /* Data */,
+				EC85E9372A218615004A1786 /* Presenter */,
+				EC85E9362A21860E004A1786 /* Router */,
+				EC85E9302A2185D9004A1786 /* UI */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
+		EC85E92F2A2185CE004A1786 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				EC85E9352A218605004A1786 /* Model */,
+				EC85E9342A2185FE004A1786 /* UseCase */,
+				EC85E9332A2185F7004A1786 /* Repository */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		EC85E9302A2185D9004A1786 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				ECD2914129CF8DBE002DFAFA /* SolarSystemViewController.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		EC85E9312A2185E5004A1786 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				EC85E93D2A218737004A1786 /* SolarSystemDataSourceProtocol.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		EC85E9322A2185EE004A1786 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				EC85E9392A218722004A1786 /* SolarSystemRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		EC85E9332A2185F7004A1786 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				EC85E93B2A21872A004A1786 /* SolarSystemRepositoryProtocol.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		EC85E9342A2185FE004A1786 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				EC85E94B2A21879D004A1786 /* GetPlanetsInformationUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		EC85E9352A218605004A1786 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EC85E9492A21878A004A1786 /* PlanetResponse.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EC85E9362A21860E004A1786 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				EC85E9452A218767004A1786 /* SolarSystemRouter.swift */,
+				EC85E9472A218771004A1786 /* SolarSystemRouterProtocol.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		EC85E9372A218615004A1786 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				EC85E9412A218750004A1786 /* SolarSystemPresenter.swift */,
+				EC85E9432A218758004A1786 /* SolarSystemPresenterProtocol.swift */,
+				EC85E94D2A218AC4004A1786 /* SolarSystemViewProtocol.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		EC85E9382A21861C004A1786 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				EC85E93F2A218743004A1786 /* SolarSystemDataSource.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		ECD2913129CF8DBE002DFAFA = {
@@ -375,7 +615,6 @@
 			children = (
 				EC03BFE12A0592B5006AC128 /* Core */,
 				EC70606629E9D05500F729A7 /* Modules */,
-				ECD2913D29CF8DBE002DFAFA /* AppDelegate.swift */,
 				ECD2913F29CF8DBE002DFAFA /* art.scnassets */,
 				ECD2914629CF8DBF002DFAFA /* Assets.xcassets */,
 				ECD2914829CF8DBF002DFAFA /* LaunchScreen.storyboard */,
@@ -486,43 +725,64 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC25735D2A0991880071A0F1 /* MyClaims.swift in Sources */,
+				EC79EE032A25AD64002F5D21 /* GetTasksUseCase.swift in Sources */,
+				EC79EDF12A25ACB6002F5D21 /* TasksResponse.swift in Sources */,
+				EC85E9462A218767004A1786 /* SolarSystemRouter.swift in Sources */,
 				EC03BFF92A059470006AC128 /* AuthRepositoryProtocol.swift in Sources */,
+				EC79EE0B2A25ADA2002F5D21 /* TasksRouter.swift in Sources */,
 				EC03C0022A059689006AC128 /* RegisterPresenterProtocol.swift in Sources */,
+				EC85E9442A218758004A1786 /* SolarSystemPresenterProtocol.swift in Sources */,
 				ECD291AD29E5E970002DFAFA /* LoginViewController.swift in Sources */,
+				EC79EE052A25AD72002F5D21 /* TasksPresenterProtocol.swift in Sources */,
 				ECF8A4C32A1AA98C00819451 /* ProfileViewProtocol.swift in Sources */,
 				EC764B552A04B4AF0094E0F2 /* TodoItem.swift in Sources */,
 				EC03C0002A05964C006AC128 /* BaseView.swift in Sources */,
 				EC03BFFD2A059546006AC128 /* AuthDataSource.swift in Sources */,
 				EC03BFFB2A0594F9006AC128 /* RegisterUseCase.swift in Sources */,
+				EC85E94A2A21878A004A1786 /* PlanetResponse.swift in Sources */,
 				EC4AA71B2A16B93A003237F1 /* LoginRouter.swift in Sources */,
 				EC03BFF32A0593C6006AC128 /* AuthDataSourceProtocol.swift in Sources */,
 				ECF8A4C12A1AA98300819451 /* ProfilePresenter.swift in Sources */,
 				EC4AA70D2A16B32B003237F1 /* LoginUseCase.swift in Sources */,
+				EC85E93C2A21872A004A1786 /* SolarSystemRepositoryProtocol.swift in Sources */,
 				EC03C0082A05974E006AC128 /* RegisterRouterProtocol.swift in Sources */,
+				EC79EE012A25AD58002F5D21 /* TasksDataSource.swift in Sources */,
 				ECF8A4C62A1AA9AA00819451 /* ProfileRouterProtocol.swift in Sources */,
 				EC764B522A047EDA0094E0F2 /* TasksViewController.swift in Sources */,
+				EC85E93E2A218737004A1786 /* SolarSystemDataSourceProtocol.swift in Sources */,
 				ECD291AF29E5E979002DFAFA /* RegisterViewController.swift in Sources */,
 				EC4AA7152A16B68A003237F1 /* LoginViewProtocol.swift in Sources */,
 				EC03BFF72A05945C006AC128 /* AuthRepository.swift in Sources */,
+				EC79EE092A25AD81002F5D21 /* TasksViewProtocol.swift in Sources */,
 				ECF8A4CA2A1AAD1700819451 /* GetUserDataUseCase.swift in Sources */,
-				ECD291AB29E5E83F002DFAFA /* MainViewController.swift in Sources */,
 				ECF8A4BC2A1AA90E00819451 /* LogoutUseCase.swift in Sources */,
 				ECF8A4C82A1AA9AF00819451 /* ProfileRouter.swift in Sources */,
+				EC79EDFF2A25AD4A002F5D21 /* TasksRepositoryProtocol.swift in Sources */,
 				EC4AA7172A16B694003237F1 /* LoginPresenter.swift in Sources */,
 				EC4AA7192A16B69A003237F1 /* LoginPresenterProtocol.swift in Sources */,
 				EC2573572A098BB40071A0F1 /* UserRegisterCredentials.swift in Sources */,
 				EC4AA71D2A16B944003237F1 /* LoginRouterProtocol.swift in Sources */,
+				EC85E93A2A218722004A1786 /* SolarSystemRepository.swift in Sources */,
 				EC03BFE42A0592DA006AC128 /* UseCase.swift in Sources */,
 				ECD2914229CF8DBE002DFAFA /* SolarSystemViewController.swift in Sources */,
 				EC03C00A2A059756006AC128 /* RegisterRouter.swift in Sources */,
 				EC03BFF52A059408006AC128 /* UserResult.swift in Sources */,
+				EC85E9422A218750004A1786 /* SolarSystemPresenter.swift in Sources */,
+				EC79EDFB2A25AD2F002F5D21 /* TasksRepository.swift in Sources */,
+				EC79EE072A25AD77002F5D21 /* TasksPresenter.swift in Sources */,
 				EC03C0062A0596A1006AC128 /* RegisterViewProtocol.swift in Sources */,
 				EC4AA70F2A16B526003237F1 /* UserLoginCredentials.swift in Sources */,
+				EC85E94C2A21879D004A1786 /* GetPlanetsInformationUseCase.swift in Sources */,
 				EC70607029E9E12B00F729A7 /* ProfileViewController.swift in Sources */,
 				EC03C0042A059695006AC128 /* RegisterPresenter.swift in Sources */,
+				EC79EE0D2A25ADA8002F5D21 /* TasksRouterProtocol.swift in Sources */,
 				EC70606D29E9E06C00F729A7 /* TabBarViewController.swift in Sources */,
+				EC85E94E2A218AC4004A1786 /* SolarSystemViewProtocol.swift in Sources */,
+				EC85E9482A218771004A1786 /* SolarSystemRouterProtocol.swift in Sources */,
+				EC85E9402A218743004A1786 /* SolarSystemDataSource.swift in Sources */,
 				ECF8A4BF2A1AA97D00819451 /* ProfilePresenterProtocol.swift in Sources */,
 				ECD2913E29CF8DBE002DFAFA /* AppDelegate.swift in Sources */,
+				EC79EDFD2A25AD3C002F5D21 /* TasksDataSourceProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

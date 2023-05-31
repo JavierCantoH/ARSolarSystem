@@ -9,6 +9,7 @@
 import UIKit
 import SceneKit
 import ARKit
+import Toast
 
 class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
     
@@ -66,6 +67,27 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         return label
     }()
     
+    private lazy var addButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addFile))
+        return button
+    }()
+    
+    private lazy var toastStyleMissElements: ToastStyle = {
+        var style = ToastStyle()
+        style.backgroundColor = .red
+        style.titleColor = .white
+        style.imageSize = CGSize(width: 50, height: 50)
+        return style
+    }()
+    
+    private lazy var toastStyleComplete: ToastStyle = {
+        var style = ToastStyle()
+        style.backgroundColor = .green
+        style.titleColor = .white
+        style.imageSize = CGSize(width: 50, height: 50)
+        return style
+    }()
+    
     // parent node for all the planets and other objects in the scene
     private let baseNode = SCNNode()
     
@@ -77,6 +99,10 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
     var tapGesture: UITapGestureRecognizer!
     
     var currentFactIndex = 0
+    
+    var presenter: SolarSystemPresenterProtocol?
+    
+    var planetTapped: PlanetResponse?
     
     private func constrainstSetup() {
         NSLayoutConstraint.activate([
@@ -101,10 +127,12 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.attachView(view: self)
         view.addSubview(sceneView)
         view.addSubview(backRoundBtn)
         view.addSubview(infoLabel)
         view.addSubview(nextFactButton)
+        navigationItem.rightBarButtonItem = addButton
         constrainstSetup()
         sceneView.delegate = self
         sceneView.showsStatistics = false
@@ -244,10 +272,10 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
             }
             // planet title
             baseNode.addChildNode(createText(planetName: tappedNodeCopy.name ?? "", planetNode: tappedNodeCopy))
-            // check which node is tapped
-            checkTappedNodeInfo(tappedNode: tappedNodeCopy)
             currentPlanet = tappedNodeCopy
             backRoundBtn.isHidden = false
+            currentPlanet = tappedNode
+            presenter?.getPlanetInfo(planetName: tappedNodeCopy.name!)
         }
     }
     
@@ -268,11 +296,12 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         nextFactButton.isHidden = true
         // Add the gesture recognizer back to enable taps again
         sceneView.addGestureRecognizer(tapGesture)
+        planetTapped = nil
     }
     
     @objc private func nextFactButtonTapped() {
-        guard let currentPlanetName = currentPlanet.name,
-              let facts = planetFacts[currentPlanetName],
+        guard let _ = currentPlanet.name,
+              let facts = planetTapped?.facts,
               currentFactIndex < facts.count else {
             return
         }
@@ -287,12 +316,11 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         infoLabel.text = fact
     }
     
-    private func checkTappedNodeInfo(tappedNode: SCNNode) {
+    private func checkTappedNodeInfo() {
         infoLabel.isHidden = false
         nextFactButton.isHidden = false
-        currentPlanet = tappedNode
         currentFactIndex = 0
-        if let planetName = currentPlanet.name, let facts = planetFacts[planetName]{
+        if let _ = currentPlanet.name, let facts = planetTapped?.facts {
             infoLabel.text = facts[0]
         }
     }
@@ -353,47 +381,80 @@ class SolarSystemViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
     
-    let planetFacts = [
-        "sun": [
-            "El Sol es la estrella más cercana a la Tierra.",
-            "El Sol es una bola de gas caliente, cuyo diámetro es 109 veces el de la Tierra."
-        ],
-        "moon": [
-            "La Luna es el satélite natural de la Tierra.",
-            "La Luna es el quinto satélite más grande del sistema solar."
-        ],
-        "saturn": [
-            "Saturno es el segundo planeta más grande del sistema solar.",
-            "Saturno es conocido por sus anillos.",
-            "El anillo de rocas que lo rodea no pasa de 1 km de grosor."
-        ],
-        "mercury": [
-            "Mercurio es el planeta mas pequeño del sistema solar.",
-            "Mercurio es el planeta más cercano al Sol.",
-            "Mercurio es el planeta con la orbita más pequeña del sistema solar.",
-            "Un año en Mercurio son 3 meses en la Tierra."
-        ],
-        "venus": [
-            "Venus es el planeta más caliente del sistema solar, con 876 grados Farenheit.",
-            "Venus es caliente por su atmósfera llena de dióxido de carbono",
-            "Venus tambien cuenta con rios de lava"
-        ],
-        "mars": [
-            "Marte tuvo vida dentro de su planeta hace 3.7 billones de años.",
-            "Alguna vez Marte tuvo una superficie de agua."
-        ],
-        "earth": [
-            "El sistema de agua dentro de la Tierra hace posible que haya vida."
-        ],
-        "jupiter": [
-            "Jupiter es el planeta más grande del sistema solar."
-        ],
-        "uranus": [
-            "Urano es el unico planeta que gira de lado."
-        ],
-        "neptune": [
-            "Neptuno es el planeta que se encuentra más alejado del sol.",
-            "Neptuno es el planeta más frio del sistema solar, llegando a -375 grados Farenheit."
-        ],
-    ]
+    @objc private func addFile() {
+        let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data"], in: .import)
+        documentPicker.delegate = self
+        present(documentPicker, animated: true, completion: nil)
+    }
+}
+
+extension SolarSystemViewController: SolarSystemViewProtocol {
+    
+    func showPlaneInfo(planetInfo: PlanetResponse) {
+        planetTapped = planetInfo
+        checkTappedNodeInfo()
+    }
+    
+    func showLoader() {
+        view.makeToastActivity(.bottom)
+    }
+    
+    func hideLoader() {
+        view.hideToastActivity()
+    }
+    
+    func showError(message: String) {
+        if let image = UIImage(systemName: "exclamationmark.square.fill") {
+            let tintedImage = image.withTintColor(.white, renderingMode: .alwaysOriginal)
+            view.makeToast(message, duration: 2.0, position: .center, title: "Ups!", image: tintedImage, style: toastStyleMissElements)
+        }
+    }
+}
+
+extension SolarSystemViewController: UIDocumentPickerDelegate {
+    
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard let pickedURL = urls.first else {
+            // Handle error, no URL available
+            return
+        }
+
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let destinationURL = documentsDirectory.appendingPathComponent(pickedURL.lastPathComponent)
+
+        do {
+            let fileManager = FileManager.default
+            try fileManager.moveItem(at: pickedURL, to: destinationURL)
+
+            let apiURL = URL(string: "http://localhost:3000/planet/file")!
+            var request = URLRequest(url: apiURL)
+            request.httpMethod = "POST"
+
+            let session = URLSession.shared
+
+            let task = session.uploadTask(with: request, fromFile: destinationURL) { responseData, response, error in
+                if let error = error {
+                    // Handle the error
+                    print("Error uploading file: \(error)")
+                    return
+                }
+
+                // Handle the API response
+                if let httpResponse = response as? HTTPURLResponse {
+                    if httpResponse.statusCode == 200 {
+                        // File uploaded successfully
+                        print("File uploaded successfully")
+                    } else {
+                        // Handle other HTTP status codes
+                        print("Error uploading file. HTTP status code: \(httpResponse.statusCode)")
+                    }
+                }
+            }
+
+            task.resume()
+        } catch {
+            // Handle error while saving the file
+            print("Error saving file: \(error)")
+        }
+    }
 }
