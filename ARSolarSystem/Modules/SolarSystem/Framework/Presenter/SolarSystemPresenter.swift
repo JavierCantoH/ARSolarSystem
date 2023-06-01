@@ -29,10 +29,14 @@ class SolarSystemPresenter: SolarSystemPresenterProtocol {
                 .observe(on: MainScheduler())
                 .subscribe(onSuccess: { [weak self] response in
                     self?.view?.hideLoader()
+                    if response.facts.isEmpty {
+                        self?.view?.showError(message: "No files to get planet data")
+                    }
                     self?.view?.showPlaneInfo(planetInfo: response)
                 }, onFailure: { [weak self] error in
                     self?.view?.hideLoader()
-                    self?.view?.showError(message: error.localizedDescription)
+                    debugPrint("Error getting planet info: \(error.localizedDescription)")
+                    self?.view?.showError(message: "Something went wrong getting the planet data")
                 }, onDisposed: nil).disposed(by: disposeBag)
         } catch {
             view?.showError(message: error.localizedDescription)

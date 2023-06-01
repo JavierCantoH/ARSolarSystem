@@ -34,7 +34,8 @@ class ProfilePresenter: ProfilePresenterProtocol {
                     self?.view?.getUserData(result: response.0, token: response.1)
                 }, onFailure: { [weak self] error in
                     self?.view?.hideLoader()
-                    self?.view?.showError(message: error.localizedDescription)
+                    debugPrint("Error getting user data: \(error.localizedDescription)")
+                    self?.view?.showError(message: "Something went wrong getting your data")
                 }, onDisposed: nil).disposed(by: disposeBag)
         } catch {
             view?.showError(message: error.localizedDescription)

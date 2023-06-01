@@ -25,13 +25,14 @@ class LoginViewController: UIViewController {
         textField.layer.cornerRadius = 10
         textField.layer.borderColor = UIColor.gray.cgColor
         textField.layer.borderWidth = 1.0
-        textField.attributedPlaceholder = NSAttributedString(string: "User", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        textField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         textField.textColor = .black
         // Add a padding view to the left of the text field
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftView = paddingView
         textField.leftViewMode = .always
         textField.autocapitalizationType = .none
+        textField.keyboardType = .emailAddress
         return textField
     }()
 

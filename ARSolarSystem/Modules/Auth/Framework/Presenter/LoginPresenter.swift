@@ -44,7 +44,8 @@ class LoginPresenter: LoginPresenterProtocol {
                     self?.view?.loginSuccess(user: user)
                 }, onFailure: { [weak self] error in
                     self?.view?.hideLoader()
-                    self?.view?.showError(message: error.localizedDescription)
+                    debugPrint("Error login user: \(error.localizedDescription)")
+                    self?.view?.showError(message: "Please enter valid credentials")
                 }, onDisposed: nil).disposed(by: disposeBag)
         } catch {
             view?.showError(message: error.localizedDescription)

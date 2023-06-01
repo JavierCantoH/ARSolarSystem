@@ -49,7 +49,8 @@ class RegisterPresenter: RegisterPresenterProtocol {
                     self?.view?.registerSuccess(user: user)
                 }, onFailure: { [weak self] error in
                     self?.view?.hideLoader()
-                    self?.view?.showError(message: error.localizedDescription)
+                    debugPrint("Error register user: \(error.localizedDescription)")
+                    self?.view?.showError(message: "Please review your information")
                 }, onDisposed: nil).disposed(by: disposeBag)
         } catch {
             view?.showError(message: error.localizedDescription)

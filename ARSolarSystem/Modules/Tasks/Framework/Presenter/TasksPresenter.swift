@@ -29,10 +29,14 @@ class TasksPresenter: TasksPresenterProtocol {
                 .observe(on: MainScheduler())
                 .subscribe(onSuccess: { [weak self] response in
                     self?.view?.hideLoader()
+                    if response.tasksArray.isEmpty {
+                        self?.view?.showError(message: "No file to get tasks from")
+                    }
                     self?.view?.showTasks(tasks: response)
                 }, onFailure: { [weak self] error in
                     self?.view?.hideLoader()
-                    self?.view?.showError(message: error.localizedDescription)
+                    debugPrint("Error get tasks: \(error.localizedDescription)")
+                    self?.view?.showError(message: "Something went wrong getting your tasks")
                 }, onDisposed: nil).disposed(by: disposeBag)
         } catch {
             view?.showError(message: error.localizedDescription)
